@@ -1,0 +1,26 @@
+2015/02/11 08:11:49 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `tbl_tax`
+in C:\wamp\www\featherdown\protected\modules\admin\controllers\TaxController.php (65)
+in C:\wamp\www\featherdown\index.php (13)
+2015/02/11 08:11:49 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `tbl_tax`
+in C:\wamp\www\featherdown\protected\modules\admin\controllers\TaxController.php (65)
+in C:\wamp\www\featherdown\index.php (13)
+2015/02/11 08:11:49 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `tbl_tax_group`
+in C:\wamp\www\featherdown\protected\modules\admin\views\tax\_form.php (32)
+in C:\wamp\www\featherdown\protected\modules\admin\views\tax\create.php (18)
+in C:\wamp\www\featherdown\protected\modules\admin\controllers\TaxController.php (79)
+2015/02/11 08:11:49 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `tbl_tax_group`
+in C:\wamp\www\featherdown\protected\modules\admin\views\tax\_form.php (32)
+in C:\wamp\www\featherdown\protected\modules\admin\views\tax\create.php (18)
+in C:\wamp\www\featherdown\protected\modules\admin\controllers\TaxController.php (79)
+2015/02/11 08:11:49 [trace] [system.db.CDbCommand] Querying SQL: SHOW FULL COLUMNS FROM `tbl_environment_content`
+in C:\wamp\www\featherdown\protected\modules\admin\views\tax\_form.php (32)
+in C:\wamp\www\featherdown\protected\modules\admin\views\tax\create.php (18)
+in C:\wamp\www\featherdown\protected\modules\admin\controllers\TaxController.php (79)
+2015/02/11 08:11:49 [trace] [system.db.CDbCommand] Querying SQL: SHOW CREATE TABLE `tbl_environment_content`
+in C:\wamp\www\featherdown\protected\modules\admin\views\tax\_form.php (32)
+in C:\wamp\www\featherdown\protected\modules\admin\views\tax\create.php (18)
+in C:\wamp\www\featherdown\protected\modules\admin\controllers\TaxController.php (79)
+2015/02/11 08:11:49 [trace] [system.db.CDbCommand] Querying SQL: SELECT `t`.`tax_group_id` AS `t0_c0`, `contents`.`env_title` AS `t1_c3`, `contents`.`environment_content_id` AS `t1_c0` FROM `tbl_tax_group` `t`  LEFT OUTER JOIN `tbl_environment_content` `contents` ON (`contents`.`primary_table_id`=`t`.`tax_group_id`) WHERE (contents.primary_table_flag = 4 and contents.language_id = 1)
+in C:\wamp\www\featherdown\protected\modules\admin\views\tax\_form.php (32)
+in C:\wamp\www\featherdown\protected\modules\admin\views\tax\create.php (18)
+in C:\wamp\www\featherdown\protected\modules\admin\controllers\TaxController.php (79)
