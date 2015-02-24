@@ -79,7 +79,7 @@ class City extends CActiveRecord
 			'state_id' => 'Province',
 			'country_id' => 'Country',
 			'city_slug' => 'City Slug',
-			'city_abbreviation' => 'City Abbreviation',
+			'city_abbreviation' => 'Abbreviation',
 			'environments' => 'Environments',
 			'isactive' => 'Is Active',
 			'created_on' => 'Created On',

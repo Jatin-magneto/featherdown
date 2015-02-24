@@ -32,16 +32,6 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'environment_currency'); ?>
-		<?php echo $form->textField($model,'environment_currency',array('size'=>60,'maxlength'=>100)); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'environment_currency_symbol'); ?>
-		<?php echo $form->textField($model,'environment_currency_symbol',array('size'=>15,'maxlength'=>15)); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->label($model,'environment_desc'); ?>
 		<?php echo $form->textArea($model,'environment_desc',array('rows'=>6, 'cols'=>50)); ?>
 	</div>

@@ -11,7 +11,6 @@
  * @property string $environments
  * @property string $locale
  * @property string $locale_slug
- * @property string $date_format
  * @property string $date_short
  * @property string $date_long
  * @property string $locale_pricing
@@ -41,11 +40,11 @@ class Locale extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('country_id, currency_id, language_id, locale, locale_slug, date_format, date_short, date_long, environments, locale_pricing', 'required'),
+			array('country_id, currency_id, language_id, locale, locale_slug, date_short, date_long, environments, locale_pricing', 'required'),
 			array('locale_slug', 'unique', 'className' => 'Locale', 'attributeName' => 'locale_slug', 'message'=>'This slug is already in use'),
 			array('country_id, currency_id, language_id', 'numerical', 'integerOnly'=>true),
 			array('locale, locale_slug, created_by, updated_by', 'length', 'max'=>255),
-			array('date_format, date_short, date_long', 'length', 'max'=>15),
+			array('date_short, date_long', 'length', 'max'=>15),
 			array('locale_pricing', 'length', 'max'=>10),
 			array('isactive', 'length', 'max'=>1),
 			array('environments, created_on, updated_on', 'safe'),
@@ -82,7 +81,6 @@ class Locale extends CActiveRecord
 			'environments' => 'Environments',
 			'locale' => 'Locale',
 			'locale_slug' => 'Locale Slug',
-			'date_format' => 'Date Format',
 			'date_short' => 'Date Short',
 			'date_long' => 'Date Long',
 			'locale_pricing' => 'Locale Pricing',
@@ -122,7 +120,6 @@ class Locale extends CActiveRecord
 		$criteria->compare('environments',$this->environments,true);
 		$criteria->compare('locale',$this->locale,true);
 		$criteria->compare('locale_slug',$this->locale_slug,true);
-		$criteria->compare('date_format',$this->date_format,true);
 		$criteria->compare('date_short',$this->date_short,true);
 		$criteria->compare('date_long',$this->date_long,true);
 		$criteria->compare('locale_pricing',$this->locale_pricing,true);

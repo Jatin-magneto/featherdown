@@ -50,7 +50,6 @@ class UserIdentity extends CUserIdentity
 			Yii::app()->session['environment_id'] = '';
 			Yii::app()->session['environment_name'] = '';
 			Yii::app()->session['language_id'] = '';
-			Yii::app()->session['environment_currency'] = '';
 			Yii::app()->session['environment_url'] = '';
 			Yii::app()->session['environment_cond'] = "true";
 			

@@ -48,11 +48,6 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'date_format'); ?>
-		<?php echo $form->textField($model,'date_format',array('size'=>15,'maxlength'=>15)); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->label($model,'date_short'); ?>
 		<?php echo $form->textField($model,'date_short',array('size'=>15,'maxlength'=>15)); ?>
 	</div>

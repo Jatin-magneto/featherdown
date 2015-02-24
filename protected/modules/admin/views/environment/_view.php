@@ -21,14 +21,6 @@
 	<?php echo CHtml::encode($data->language_id); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('environment_currency')); ?>:</b>
-	<?php echo CHtml::encode($data->environment_currency); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('environment_currency_symbol')); ?>:</b>
-	<?php echo CHtml::encode($data->environment_currency_symbol); ?>
-	<br />
-
 	<?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('environment_desc')); ?>:</b>
 	<?php echo CHtml::encode($data->environment_desc); ?>

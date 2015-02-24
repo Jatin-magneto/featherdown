@@ -47,7 +47,7 @@ class Product extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('product_category_id,product_code, title, allow_max_persons, allow_max_adults, per_day, per_day_stay, travel_sum, isactive, environments', 'required'),
+			array('product_category_id,product_code, title, allow_max_persons, image, allow_max_adults, per_day, per_day_stay, travel_sum, isactive, environments', 'required'),
 			array('product_category_id, allow_max_persons, allow_max_adults', 'numerical', 'integerOnly'=>true),
 			array('image', 'file', 'types'=>'jpg, png','on'=>'insert'),
 			//array('image', 'file', 'allowEmpty'=>true,'types'=>'jpg, png','on'=>'update'),

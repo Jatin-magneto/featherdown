@@ -48,8 +48,7 @@ $('.search-form form').submit(function(){
 		),
 		'environment_id',
 		'environment_name',
-		'environment_url',		
-		'environment_currency',
+		'environment_url',
 		array(
 			'header' => 'Created On',
             'name'=>'created',

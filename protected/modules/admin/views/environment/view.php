@@ -25,8 +25,6 @@ $this->menu=array(
 		'environment_name',
 		'environment_url',
 		'language_id',
-		'environment_currency',
-		'environment_currency_symbol',
 		'environment_desc',
 		'created_on',
 		'created_by',

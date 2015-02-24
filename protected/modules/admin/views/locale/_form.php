@@ -62,12 +62,6 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'date_format'); ?>
-		<?php echo $form->textField($model,'date_format',array('size'=>15,'maxlength'=>15)); ?>
-		<?php echo $form->error($model,'date_format',array(),false); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($model,'date_short'); ?>
 		<?php echo $form->textField($model,'date_short',array('size'=>15,'maxlength'=>15)); ?>
 		<?php echo $form->error($model,'date_short',array(),false); ?>

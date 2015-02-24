@@ -119,7 +119,7 @@ Yii::app()->clientScript->registerScript(
     <ul class="nav navbar-right top-nav">
       <li class="dropdown"> <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i class="fa fa-globe"></i><?php echo (Yii::app()->session['environment_url'] != '')? '  '. Yii::app()->session['environment_url']:'  Domain'; ?><b class="caret"></b></a>
         <ul class="dropdown-menu domain-dropdown">
-            <li> <?php echo CHtml::link("select environment","",array('onclick'=>"{updateEnvironment('');}")); ?> </li>
+            <li> <?php echo CHtml::link("All Domains (All)","",array('onclick'=>"{updateEnvironment('');}")); ?> </li>
         <?php foreach($list as $key => $val){ 
             $active = (Yii::app()->session['environment_id'] == $key)?'active':'';
             ?>

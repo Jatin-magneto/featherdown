@@ -8,8 +8,6 @@
  * @property string $environment_name
  * @property string $environment_url
  * @property string $language_id
- * @property string $environment_currency
- * @property string $environment_currency_symbol
  * @property string $environment_desc
  * @property string $created_on
  * @property string $created_by
@@ -41,14 +39,12 @@ class Environment extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('environment_name, environment_url, language_id, environment_currency, environment_currency_symbol, environment_desc', 'required'),
+			array('environment_name, environment_url, language_id, environment_desc', 'required'),
             array('environment_name, environment_url, created_by, updated_by', 'length', 'max'=>255),
-			array('environment_currency', 'length', 'max'=>100),
-			array('environment_currency_symbol', 'length', 'max'=>15),
 			array('environment_desc, created_on, updated_on', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('environment_id, environment_name, environment_url, language_id, environment_currency, environment_currency_symbol, environment_desc, created, updated', 'safe', 'on'=>'search'),
+			array('environment_id, environment_name, environment_url, language_id, environment_desc, created, updated', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -76,8 +72,6 @@ class Environment extends CActiveRecord
 			'environment_name' => 'Environment Name',
 			'environment_url' => 'Environment Url',
 			'language_id' => 'Language ID',
-			'environment_currency' => 'Environment Currency',
-			'environment_currency_symbol' => 'Environment Currency Symbol',
 			'environment_desc' => 'Environment Desc',
 			'created_on' => 'Created On',
 			'created_by' => 'Created By',
@@ -108,8 +102,6 @@ class Environment extends CActiveRecord
 		$criteria->compare('environment_name',$this->environment_name,true);
 		$criteria->compare('environment_url',$this->environment_url,true);
 		$criteria->compare('language_id',$this->language_id,true);
-		$criteria->compare('environment_currency',$this->environment_currency,true);
-		$criteria->compare('environment_currency_symbol',$this->environment_currency_symbol,true);
 		$criteria->compare('environment_desc',$this->environment_desc,true);
 		$criteria->compare('CONCAT(t.created_on,t.created_by)',$this->created,true);
 		$criteria->compare('CONCAT(t.updated_on,t.updated_by)',$this->updated,true);
@@ -131,6 +123,26 @@ class Environment extends CActiveRecord
 				),
 			),
 		));
+	}
+	
+	public function deleteEnvironment($id){
+		
+		
+		$sql 	= "SELECT COUNT(created_by) AS cnt FROM tbl_environment WHERE FIND_IN_SET($id, environments)";
+		$sql   .= " UNION ";
+		$sql   .= "SELECT COUNT(created_by) AS cnt FROM tbl_environment WHERE FIND_IN_SET($id, environments)";
+		$sql   .= " UNION ";
+		$sql   .= "SELECT COUNT(created_by) AS cnt FROM tbl_environment WHERE FIND_IN_SET($id, environments)";
+		$sql   .= " UNION ";
+		$sql   .= "SELECT COUNT(created_by) AS cnt FROM tbl_environment WHERE FIND_IN_SET($id, environments)";
+		$sql   .= " UNION ";
+		$sql   .= "SELECT COUNT(created_by) AS cnt FROM tbl_environment WHERE FIND_IN_SET($id, environments)";
+		
+		$connection	= Yii::app()->db;
+		$command	= $connection->createCommand($sql);
+		$rowCount	= $command->execute();
+		$dataReader	= $command->query();
+
 	}
 
 	/**

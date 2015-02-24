@@ -122,14 +122,12 @@ class SiteController extends Controller
         Yii::app()->session['environment_id'] = $env = $_POST['environment_id'];
         Yii::app()->session['environment_name'] = $data[0]['environment_name'];
         Yii::app()->session['language_id'] = $data[0]['language_id'];
-        Yii::app()->session['environment_currency'] = $data[0]['environment_currency'];
         Yii::app()->session['environment_url'] = $data[0]['environment_url'];
         Yii::app()->session['environment_cond'] = " FIND_IN_SET($env,t.environments) ";
         }else{
         Yii::app()->session['environment_id'] = '';
         Yii::app()->session['environment_name'] = '';
         Yii::app()->session['language_id'] = '';
-        Yii::app()->session['environment_currency'] = '';
         Yii::app()->session['environment_url'] = '';
 		Yii::app()->session['environment_cond'] = "true";
         }
