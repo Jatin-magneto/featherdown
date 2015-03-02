@@ -114,21 +114,17 @@ class SiteController extends Controller
     
     public function actionChangeEnv()
     {
-        //print_r($data);exit;
         $setid = $_POST['environment_id'];
+	
         if($setid != ''){
-        $data = Environment::model()->findAll(array('condition'=>"environment_id = $setid"));
-        
-        Yii::app()->session['environment_id'] = $env = $_POST['environment_id'];
-        Yii::app()->session['environment_name'] = $data[0]['environment_name'];
-        Yii::app()->session['language_id'] = $data[0]['language_id'];
-        Yii::app()->session['environment_url'] = $data[0]['environment_url'];
-        Yii::app()->session['environment_cond'] = " FIND_IN_SET($env,t.environments) ";
+		$data = Environment::model()->findAll(array('condition'=>"environment_id = $setid"));
+		Yii::app()->session['environment_id'] = $env = $_POST['environment_id'];
+		Yii::app()->session['env_title'] = $data[0]['env_title'];
+		
+		Yii::app()->session['environment_cond'] = " FIND_IN_SET($env,t.environments) ";
         }else{
-        Yii::app()->session['environment_id'] = '';
-        Yii::app()->session['environment_name'] = '';
-        Yii::app()->session['language_id'] = '';
-        Yii::app()->session['environment_url'] = '';
+		Yii::app()->session['environment_id'] = '';
+		Yii::app()->session['env_title'] = "";
 		Yii::app()->session['environment_cond'] = "true";
         }
     }

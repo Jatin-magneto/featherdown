@@ -57,8 +57,8 @@ class SaleChannelType extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'sale_channel_type_id' => 'Sale Channel Type',
-            'title' => 'Title',
+			'sale_channel_type_id' => 'Sale Channel',
+			'title' => 'Title',
 			'isactive' => 'Is Active',
 			'environments' => 'Environments',
 			'created_by' => 'Created By',

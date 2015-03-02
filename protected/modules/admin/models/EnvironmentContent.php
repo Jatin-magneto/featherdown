@@ -34,8 +34,9 @@ class EnvironmentContent extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-            //array('env_title, env_sub_title,env_title_slug', 'required'),
+			//array('env_title, env_sub_title,env_title_slug', 'required'),
 			array('env_title, env_sub_title,env_title_slug,env_desc', 'safe'),
+			//array('env_title_slug', 'unique','className' => 'EnvironmentContent', 'attributeName' => 'env_title_slug', 'message'=>'This slug is already in use'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('environment_content_id, primary_table_id, language_id, env_title, env_sub_title, env_title_slug, env_desc, primary_table_flag', 'safe', 'on'=>'search'),

@@ -140,7 +140,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'environments'); ?>
-		<?php $list = CHtml::listData(Environment::model()->findAll(),'environment_id','environment_url');
+		<?php $list = CHtml::listData(Environment::model()->findAll(),'environment_id','env_title');
               echo $form->checkBoxList($model,'environments',$list,array('separator'=>' ', 'labelOptions'=>array('style'=>'display:inline;margin-right: 10px;'))); ?>
 		<?php echo $form->error($model,'environments',array(),false); ?>
 	</div>
@@ -163,6 +163,9 @@
 </div><!-- form -->
 <script>
 	$(document).ready(function(){
+		$("#Tax_publish_from").attr('readonly', 'readonly');
+		$("#Tax_publish_until").attr('readonly', 'readonly');
+		
 		$("#Tax_title").bind("keyup", function(){
 			var title1 = document.getElementById("Tax_title").value;
 			var slug = slugify(title1);

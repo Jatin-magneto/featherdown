@@ -17,10 +17,6 @@
 	<?php echo CHtml::encode($data->environment_url); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('language_id')); ?>:</b>
-	<?php echo CHtml::encode($data->language_id); ?>
-	<br />
-
 	<?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('environment_desc')); ?>:</b>
 	<?php echo CHtml::encode($data->environment_desc); ?>

@@ -13,7 +13,7 @@
 	// There is a call to performAjaxValidation() commented in generated controller code.
 	// See class documentation of CActiveForm for details on this.
 	'enableAjaxValidation'=>false,
-    'enableClientValidation'=>true,
+	'enableClientValidation'=>true,
         'clientOptions'=> array(
         'validateOnSubmit'=>true,
         'afterValidate'=>'js:function(form, data, hasError) {if (!hasError){ $.blockUI(); return true; }}',
@@ -22,8 +22,7 @@
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
-	<?php //echo $form->errorSummary($model); ?>
-    <?php $environment_cond = Yii::app()->session['environment_cond']; ?>
+	<?php $environment_cond = Yii::app()->session['environment_cond']; ?>
     
     
 	<div class="row">
@@ -34,46 +33,26 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'parent_category_id'); ?>
-		<?php //echo $form->textField($model,'parent_category_id'); ?>
-		<?php //echo $form->dropDownList($model, 'parent_category_id',CHtml::listData(ProductCategory::model()->findAll(array('condition'=>"$environment_cond")),'category_id','title'),array('class'=>'span3', 'empty' => array(0=>'Parent Category'))); ?>
-	    <?php
-
+	        <?php
 		$parents = ProductCategory::model()->findAll('parent_category_id = 0');
 		$cm = new Functions();
 		$data = $cm->makeDropDown($parents);
-		//pre($data);
-		echo $form->dropDownList($model,'parent_category_id',  $data); 
-	
+		echo $form->dropDownList($model,'parent_category_id',  $data);
 		?>		
 		<?php echo $form->error($model,'parent_category_id'); ?>
-	</div>
-    
-	<div class="row">
-		<?php echo $form->labelEx($model,'sales_group_tax_id'); ?>
-		<?php //echo $form->textField($model,'sales_group_tax_id'); ?>
-        <?php echo $form->dropDownList($model, 'sales_group_tax_id',CHtml::listData(Tax::model()->findAll(array('condition'=>"$environment_cond")),'tax_id','title'),array('class'=>'span3', 'prompt' => 'Select Tax')); ?>    
-		<?php echo $form->error($model,'sales_group_tax_id'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'purchase_group_tax_id'); ?>
-		<?php //echo $form->textField($model,'purchase_group_tax_id'); ?>
-        <?php echo $form->dropDownList($model, 'purchase_group_tax_id',CHtml::listData(Tax::model()->findAll(array('condition'=>"$environment_cond")),'tax_id','title'),array('class'=>'span3', 'prompt' => 'Select Tax')); ?>
-		<?php echo $form->error($model,'purchase_group_tax_id'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'environments'); ?>
 		<?php //echo $form->textArea($model,'environments',array('rows'=>6, 'cols'=>50)); ?>
-        <?php $list = CHtml::listData(Environment::model()->findAll(),'environment_id','environment_url');
-              echo $form->checkBoxList($model,'environments',$list,array('separator'=>' ', 'labelOptions'=>array('style'=>'display:inline;margin-right: 10px;'))); ?>
+		<?php $list = CHtml::listData(Environment::model()->findAll(),'environment_id','env_title');
+                echo $form->checkBoxList($model,'environments',$list,array('separator'=>' ', 'labelOptions'=>array('style'=>'display:inline;margin-right: 10px;'))); ?>
 		<?php echo $form->error($model,'environments'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'isactive'); ?>
 		<?php echo $form->radioButtonList($model, 'isactive', array('1'=>'Yes','0'=>'No'),array('separator'=>' ', 'labelOptions'=>array('style'=>'display:inline;margin-right: 10px;'))); ?>
-        <?php //echo $form->textField($model,'isactive',array('size'=>1,'maxlength'=>1)); ?>
 		<?php echo $form->error($model,'isactive'); ?>
 	</div>
 
@@ -89,3 +68,17 @@
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+<script>
+	$(document).ready(function(){
+		$(document).on("change, blur", ".slug-unique", function(){		
+			var lang_id 			= $(this).attr('rel');
+			var id 					= 'EnvironmentContent_'+lang_id+'_env_title_slug_em_mis';
+			var slug	 			= document.getElementById("EnvironmentContent_"+lang_id+"_env_title_slug").value;
+			var primary_table_flag	= 5;
+			var rid					= '<?php echo (isset($_GET['id']) ? $_GET['id'] : 0); ?>'
+			
+			var result = checkSlugUnique(id,lang_id,slug,primary_table_flag,rid);
+			//var slug = slugify(title1);
+		});		
+	});
+</script>

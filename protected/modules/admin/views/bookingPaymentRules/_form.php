@@ -135,7 +135,7 @@
 	<div class="row">
 		<?php echo $form->labelEx($model,'environments'); ?>
 		<?php //echo $form->textArea($model,'environments',array('rows'=>6, 'cols'=>50)); ?>
-		<?php $list = CHtml::listData(Environment::model()->findAll(),'environment_id','environment_url');
+		<?php $list = CHtml::listData(Environment::model()->findAll(),'environment_id','env_title');
                 echo $form->checkBoxList($model,'environments',$list,array('separator'=>' ', 'labelOptions'=>array('style'=>'display:inline;margin-right: 10px;'))); ?>
 		<?php echo $form->error($model,'environments'); ?>
 	</div>
@@ -176,6 +176,10 @@ function remInst(id)
 }
 
 $(document).ready(function(){
+	
+	$("#BookingPaymentRules_start_date").attr('readonly', 'readonly');
+	$("#BookingPaymentRules_end_date").attr('readonly', 'readonly');
+	
 	var date_validate = 0;
 	$('#BookingPaymentRules_end_date').change(function(){
 		

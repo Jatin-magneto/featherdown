@@ -109,31 +109,32 @@ class ProductCategoryController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-        $model2=EnvironmentContent::model()->findAll(array('condition'=>"primary_table_id=$id and primary_table_flag=5"));
-        $model->environments = explode(',',$model->environments);
-
+		$model2=EnvironmentContent::model()->findAll(array('condition'=>"primary_table_id=$id and primary_table_flag=5"));
+		$model->environments = explode(',',$model->environments);
+		
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-
+		
 		if(isset($_POST['ProductCategory']))
 		{
 			$model->attributes=$_POST['ProductCategory'];
-            $user = Yii::app()->user;
-            
-            $model->updated_on = new CDbExpression('NOW()');
-            $model->updated_by = Yii::app()->user->username;
-            $model->environments = implode(',',$model->environments);
+			$user = Yii::app()->user;
+			
+			$model->updated_on = new CDbExpression('NOW()');
+			$model->updated_by = Yii::app()->user->username;
+			$model->environments = implode(',',$model->environments);
+			
 			if($model->save()){
-                $id = $model->getPrimaryKey();
-                Functions::updateEnvironmentContent($_POST['EnvironmentContent'],$id,'5');
+				$id = $model->getPrimaryKey();
+				Functions::updateEnvironmentContent($_POST['EnvironmentContent'],$id,'5');
 				Yii::app()->user->setFlash('info', "Record has been updated successfully.");
-            	$this->redirect(array('admin'));
+				$this->redirect(array('admin'));
 			}
-		}		
-
+		}
+		
 		$this->render('update',array(
 			'model'=>$model,
-            'model2'=>$model2,
+			'model2'=>$model2,
 		));
 	}
 	
@@ -147,6 +148,8 @@ class ProductCategoryController extends Controller
 		try{
 			$id = str_replace('-',',',rtrim($_GET['id'],'-'));
 			ProductCategory::model()->deleteAll("category_id IN ($id)");
+			Functions::deleteEnvironmentContent($id,'5');
+			Yii::app()->user->setFlash('info', "Record has been deleted successfully.");
 			$this->redirect(array('admin'));
 		}catch(CDbException $e){
 			//You can have nother error handling

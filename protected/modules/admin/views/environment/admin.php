@@ -37,7 +37,7 @@ $('.search-form form').submit(function(){
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'environment-grid',
-    'itemsCssClass' => 'table table-striped table-bordered table-hover',
+	'itemsCssClass' => 'table table-striped table-bordered table-hover',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
@@ -47,17 +47,16 @@ $('.search-form form').submit(function(){
 			'id'=>'cgridview-check-boxes',
 		),
 		'environment_id',
-		'environment_name',
-		'environment_url',
+		'env_title',
 		array(
 			'header' => 'Created On',
-            'name'=>'created',
+			'name'=>'created',
 			'value'=>'Yii::app()->dateFormatter->format("MM-dd-yyyy HH:mm:ss",strtotime($data->created_on)) . " By " . $data->created_by'
-        ),
-        array(
-            'header'=>'Updated On',
+			),
+		array(
+			'header'=>'Updated On',
 			'name'=> 'updated',
 			'value'=>'Yii::app()->dateFormatter->format("MM-dd-yyyy HH:mm:ss",strtotime($data->updated_on)) . " By " . $data->updated_by'            
-        ),
+		),
 	),
 )); ?>

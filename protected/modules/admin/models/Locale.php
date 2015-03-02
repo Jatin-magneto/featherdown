@@ -40,7 +40,7 @@ class Locale extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('country_id, currency_id, language_id, locale, locale_slug, date_short, date_long, environments, locale_pricing', 'required'),
+			array('country_id,isactive, currency_id, language_id, locale, locale_slug, date_short, date_long, environments, locale_pricing', 'required'),
 			array('locale_slug', 'unique', 'className' => 'Locale', 'attributeName' => 'locale_slug', 'message'=>'This slug is already in use'),
 			array('country_id, currency_id, language_id', 'numerical', 'integerOnly'=>true),
 			array('locale, locale_slug, created_by, updated_by', 'length', 'max'=>255),
@@ -84,7 +84,7 @@ class Locale extends CActiveRecord
 			'date_short' => 'Date Short',
 			'date_long' => 'Date Long',
 			'locale_pricing' => 'Locale Pricing',
-			'isactive' => 'Isactive',
+			'isactive' => 'Is Active',
 			'created_on' => 'Created On',
 			'created_by' => 'Created By',
 			'updated_on' => 'Updated On',

@@ -7,7 +7,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create Language', 'url'=>array('create')),
+	array('label'=>'Add Language', 'url'=>array('create')),
 	array('label'=>'Manage Language', 'url'=>array('admin')),
 );
 ?>

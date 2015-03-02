@@ -27,11 +27,6 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'language_id'); ?>
-		<?php echo $form->textField($model,'language_id',array('size'=>50,'maxlength'=>50)); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->label($model,'environment_desc'); ?>
 		<?php echo $form->textArea($model,'environment_desc',array('rows'=>6, 'cols'=>50)); ?>
 	</div>

@@ -46,10 +46,7 @@ class Functions
             
                 $data[$parent->category_id] = $parent->title;
                 $this->subDropDown($parent->children);
-                
-
         }
-        
        return $data;
     }
     
@@ -64,7 +61,6 @@ class Functions
                         $data[$child->category_id] = $space.$child->title;
                         $this->subDropDown($child->children,$space.'-');
                 }
-        
     }
 
 }

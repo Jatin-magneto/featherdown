@@ -26,7 +26,7 @@
 		<div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
 		<?php if(!Yii::app()->user->isGuest) { ?>
         <span style="float: right;margin-top: -35px;margin-right: 10px;">
-            <?php $list = CHtml::listData(Environment::model()->findAll(),'environment_id','environment_url'); ?>
+            <?php $list = CHtml::listData(Environment::model()->findAll(),'environment_id','env_title'); ?>
             <?php echo CHtml::dropDownList('environment',Yii::app()->session['environment_id'],$list,array(
                         'empty' => 'select environment',
                         'ajax' => array(

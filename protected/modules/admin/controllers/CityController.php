@@ -32,14 +32,14 @@ class CityController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','deleterec'),
+				'actions'=>array('admin','delete','deleterec','dynamicprovincecity'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
-                'actions'=>array('index','view'),
+				'actions'=>array('index','view'),
 				'users'=>array('*'),
 			),
-            array('deny',  // deny all users
+			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
 		);
@@ -63,23 +63,23 @@ class CityController extends Controller
 	public function actionCreate()
 	{
 		$model=new City;
-
+		
 		// Uncomment the following line if AJAX validation is needed
 		 $this->performAjaxValidation($model);
-
+		 
 		if(isset($_POST['City']))
 		{
 			$model->attributes=$_POST['City'];
-            
-            $user = Yii::app()->user;
-            
-            $model->created_on = new CDbExpression('NOW()');
-            $model->created_by = Yii::app()->user->username;
-	    $model->updated_on = new CDbExpression('NOW()');
-		$model->updated_by = Yii::app()->user->username;
-            
-            $model->environments = implode(',',$model->environments);
-            
+			
+			$user = Yii::app()->user;
+			
+			$model->created_on = new CDbExpression('NOW()');
+			$model->created_by = Yii::app()->user->username;
+			$model->updated_on = new CDbExpression('NOW()');
+			$model->updated_by = Yii::app()->user->username;
+			
+			$model->environments = implode(',',$model->environments);
+			
 			if($model->save()){
 				Yii::app()->user->setFlash('info', "Record has been inserted successfully.");
 				$this->redirect(array('admin'));
@@ -88,7 +88,7 @@ class CityController extends Controller
 		if(isset($model->environments)){
 			$model->environments = explode(',',$model->environments);
 		}
-
+		
 		$this->render('create',array(
 			'model'=>$model,
 		));
@@ -102,20 +102,19 @@ class CityController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-        $model->environments = explode(',',$model->environments);
-
+		
 		// Uncomment the following line if AJAX validation is needed
-		 $this->performAjaxValidation($model);
-
+		$this->performAjaxValidation($model);
+		 
 		if(isset($_POST['City']))
 		{
 			$model->attributes=$_POST['City'];
-            $user = Yii::app()->user;
-            
-            $model->updated_on = new CDbExpression('NOW()');
-            $model->updated_by = Yii::app()->user->username;
-            $model->environments = implode(',',$model->environments);
-            
+			$user = Yii::app()->user;
+			
+			$model->updated_on = new CDbExpression('NOW()');
+			$model->updated_by = Yii::app()->user->username;
+			$model->environments = implode(',',$model->environments);
+			
 			if($model->save()){
 				Yii::app()->user->setFlash('info', "Record has been updated successfully.");
 				$this->redirect(array('admin'));
@@ -125,7 +124,7 @@ class CityController extends Controller
 		if(isset($model->environments)){
 			$model->environments = explode(',',$model->environments);
 		}
-
+		
 		$this->render('update',array(
 			'model'=>$model,
 		));
@@ -141,6 +140,7 @@ class CityController extends Controller
 		try{
 			$id = str_replace('-',',',rtrim($_GET['id'],'-'));
 			City::model()->deleteAll("city_id IN ($id)");
+			Yii::app()->user->setFlash('info', "Record has been deleted successfully.");
 			$this->redirect(array('admin'));
 		}catch(CDbException $e){
 			//You can have nother error handling
@@ -215,6 +215,22 @@ class CityController extends Controller
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
+		}
+	}
+	
+	
+	public function actionDynamicprovincecity()
+	{   
+		//echo '<pre>';print_r($_POST);exit;
+		$state_id = $_POST['Region']['state_id'];
+		$environment_cond = Yii::app()->session['environment_cond'];
+		$data=City::model()->findAll(array("condition" => "state_id = $state_id and $environment_cond"));
+	     
+		$data=CHtml::listData($data,'city_id','city_name');
+		echo CHtml::tag('option',array('value'=>''),CHtml::encode('Select City'),true);
+		foreach($data as $value=>$name)
+		{
+		    echo CHtml::tag('option',array('value'=>$value),CHtml::encode($name),true);
 		}
 	}
 }

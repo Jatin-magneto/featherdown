@@ -55,22 +55,14 @@ $('.search-form form').submit(function(){
 		//),
 		//'sales_group_tax_id',
 		array(
-		    'name'=>'taxsales_title',
-		    'value'=>'$data->taxsales->title'
-		),		
-		array(
-		    'name'=>'taxpuchase_title',
-		    'value'=>'$data->taxpurchase->title'
+			'header' => 'Created On',
+			'name'=>'created',
+			'value'=>'Yii::app()->dateFormatter->format("MM-dd-yyyy HH:mm:ss",strtotime($data->created_on)) . " By " . $data->created_by'
 		),
 		array(
-			'header' => 'Created On',
-            'name'=>'created',
-			'value'=>'Yii::app()->dateFormatter->format("MM-dd-yyyy HH:mm:ss",strtotime($data->created_on)) . " By " . $data->created_by'
-        ),
-        array(
-            'header'=>'Updated On',
+			'header'=>'Updated On',
 			'name'=> 'updated',
 			'value'=>'Yii::app()->dateFormatter->format("MM-dd-yyyy HH:mm:ss",strtotime($data->updated_on)) . " By " . $data->updated_by'            
-        ),
+		),
 	),
 )); ?>

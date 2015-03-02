@@ -50,7 +50,7 @@ class TaxGroup extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-            'contents' => array(self::HAS_MANY, 'EnvironmentContent', 'primary_table_id'),
+		'contents' => array(self::HAS_MANY, 'EnvironmentContent', 'primary_table_id'),
 		);
 	}
 
@@ -60,7 +60,7 @@ class TaxGroup extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-            'title' => 'Title',
+			'title' => 'Title',
 			'tax_group_id' => 'Tax Group',
 			'environments' => 'Environments',
 			'isactive' => 'Is Active',
@@ -90,7 +90,7 @@ class TaxGroup extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('tax_group_id',$this->tax_group_id);
-        $criteria->compare('title',$this->title,true);
+		$criteria->compare('title',$this->title,true);
 		$criteria->compare('environments',$this->environments,true);
 		$criteria->compare('isactive',$this->isactive,true);
 		$criteria->compare('CONCAT(t.created_on,t.created_by)',$this->created,true);

@@ -9,7 +9,7 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	//array('label'=>'List Language', 'url'=>array('index')),
-	array('label'=>'<i class="fa fa-plus-circle"></i>  Create Language', 'url'=>array('create')),
+	array('label'=>'<i class="fa fa-plus-circle"></i>  Add Language', 'url'=>array('create')),
 	array('label'=>'<i class="fa fa-pencil-square-o"></i> Edit Language', 'url'=>array('#')),
 	array('label'=>'<i class="fa fa-trash"></i> Delete Language', 'url'=>array('#')),
 );

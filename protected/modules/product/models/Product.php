@@ -6,6 +6,7 @@
  * The followings are the available columns in table 'tbl_product':
  * @property string $product_id
  * @property integer $product_category_id
+ * @property integer $ledger_category_id
  * @property string $product_code
  * @property string $title
  * @property integer $allow_max_persons
@@ -47,8 +48,8 @@ class Product extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('product_category_id,product_code, title, allow_max_persons, image, allow_max_adults, per_day, per_day_stay, travel_sum, isactive, environments', 'required'),
-			array('product_category_id, allow_max_persons, allow_max_adults', 'numerical', 'integerOnly'=>true),
+			array('product_category_id,ledger_category_id,product_code, title, allow_max_persons, allow_max_adults, per_day, per_day_stay, travel_sum, isactive, environments', 'required'),
+			array('product_category_id,ledger_category_id, allow_max_persons, allow_max_adults', 'numerical', 'integerOnly'=>true),
 			array('image', 'file', 'types'=>'jpg, png','on'=>'insert'),
 			//array('image', 'file', 'allowEmpty'=>true,'types'=>'jpg, png','on'=>'update'),
 			array('product_code', 'length', 'max'=>50),
@@ -56,7 +57,7 @@ class Product extends CActiveRecord
 			array('per_day, per_day_stay, travel_sum, isactive', 'length', 'max'=>1),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('product_id, product_category_id, product_code, title, productcategory, allow_max_persons, allow_max_adults, per_day, per_day_stay, travel_sum, image, isactive, environments, created, updated', 'safe', 'on'=>'search'),
+			array('product_id, ledger_category_id ,product_category_id, product_code, title, productcategory, allow_max_persons, allow_max_adults, per_day, per_day_stay, travel_sum, image, isactive, environments, created, updated', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -75,6 +76,7 @@ class Product extends CActiveRecord
 			'productLinkeds' => array(self::HAS_MANY, 'ProductLinked', 'product_id'),
 			
 			'category' => array(self::BELONGS_TO, 'ProductCategory', 'product_category_id'),
+			'ledger' => array(self::BELONGS_TO, 'ledgerCategory', 'ledger_category_id'),
 		);
 	}
 
@@ -86,6 +88,7 @@ class Product extends CActiveRecord
 		return array(
 			'product_id' => 'Product',
 			'product_category_id' => 'Product Category',
+			'ledger_category_id' => 'Ledger Category',
 			'product_code' => 'Product Code',
 			'title' => 'Title',
 			'allow_max_persons' => 'Max. Persons',

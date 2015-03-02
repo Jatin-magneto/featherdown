@@ -10,7 +10,7 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	//array('label'=>'List Language', 'url'=>array('index')),
-	array('label'=>'<i class="fa fa-plus-circle"></i>  Create Language', 'url'=>array('create')),
+	array('label'=>'<i class="fa fa-plus-circle"></i>  Add Language', 'url'=>array('create')),
 	//array('label'=>'View Language', 'url'=>array('view', 'id'=>$model->language_id)),
 	array('label'=>'<i class="fa fa-cogs"></i>  Manage Language', 'url'=>array('admin')),
 );

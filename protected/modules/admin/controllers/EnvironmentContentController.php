@@ -28,7 +28,7 @@ class EnvironmentContentController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','CheckSlug'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -143,6 +143,35 @@ class EnvironmentContentController extends Controller
 		));
 	}
 
+	/**
+	 * Ckeck slug unique
+	 */
+	public function actionCheckSlug()
+	{
+		if(isset($_POST['slug'])){
+			
+			$lang_id				= $_POST['lang_id'];
+			$slug					= $_POST['slug'];
+			$primary_table_flag		= $_POST['primary_table_flag'];
+			$primary_table_id		= $_POST['primary_table_id'];
+			
+			if($primary_table_id == 0){
+				$arr = EnvironmentContent::model()->findAll(array('condition'=>"`language_id` = $lang_id AND `env_title_slug` = '$slug' AND `primary_table_flag` = $primary_table_flag"));
+			}else{
+				$arr = EnvironmentContent::model()->findAll(array('condition'=>"`language_id` = $lang_id AND `env_title_slug` = '$slug' AND `primary_table_flag` = $primary_table_flag and primary_table_id!=$primary_table_id"));
+			}
+			//EnvironmentContent::model()->findAll(array('condition'=>"primary_table_id=$id and primary_table_flag=5"));
+			if(count($arr) >= 1){
+				echo 'false';
+			}else{
+				echo 'true';
+			}
+		}
+	}
+	
+	
+	
+	
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.

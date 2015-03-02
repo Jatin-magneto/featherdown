@@ -12,44 +12,58 @@
 	// controller action is handling ajax validation correctly.
 	// There is a call to performAjaxValidation() commented in generated controller code.
 	// See class documentation of CActiveForm for details on this.
-	'enableAjaxValidation'=>false,
-    'enableClientValidation'=>true,
-        'clientOptions'=> array(
+	'enableAjaxValidation'=>true,
+	'enableClientValidation'=>true,
+	'clientOptions'=> array(
         'validateOnSubmit'=>true,
         'afterValidate'=>'js:function(form, data, hasError) {if (!hasError){ $.blockUI(); return true; }}',
     ),
 )); ?>
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
-
-	<?php //echo $form->errorSummary($model); ?>
-
+	
 	<div class="row">
-		<?php echo $form->labelEx($model,'environment_name'); ?>
-		<?php echo $form->textField($model,'environment_name',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'environment_name'); ?>
+		<?php echo $form->labelEx($model,'env_title'); ?>
+		<?php echo $form->textField($model,'env_title',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->error($model,'env_title',array(),false); ?>
+	</div>
+	
+	<div class="row">
+		<?php echo $form->labelEx($model,'env_slug'); ?>
+		<?php echo $form->textField($model,'env_slug',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->error($model,'env_slug'); ?>
+	</div>
+	
+	<div class="row">
+		<?php echo $form->labelEx($model,'account_view_id'); ?>
+		<?php echo $form->textField($model,'account_view_id',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->error($model,'account_view_id',array(),false); ?>
+	</div>
+	
+	<div class="row">
+		<?php echo $form->labelEx($model,'account_center_id'); ?>
+		<?php echo $form->textField($model,'account_center_id',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->error($model,'account_center_id',array(),false); ?>
+	</div>
+	
+	<div class="row">
+		<?php echo $form->labelEx($model,'debtor_id'); ?>
+		<?php echo $form->textField($model,'debtor_id',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->error($model,'debtor_id',array(),false); ?>
+	</div>
+	
+	<div class="row">
+		<?php echo $form->labelEx($model,'sales_journal_id'); ?>
+		<?php echo $form->textField($model,'sales_journal_id',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->error($model,'sales_journal_id',array(),false); ?>
+	</div>
+	
+	<div class="row">
+		<?php echo $form->labelEx($model,'purchase_journal_id'); ?>
+		<?php echo $form->textField($model,'purchase_journal_id',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->error($model,'purchase_journal_id',array(),false); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'environment_url'); ?>
-		<?php echo $form->textField($model,'environment_url',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'environment_url'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'language_id'); ?>
-		<?php //echo $form->textField($model,'language_id',array('size'=>50,'maxlength'=>50));
-        $models = Language::model()->findAll();
-        $list = CHtml::listData($models,'language_id', 'name');
-        echo $form->dropDownList($model,'language_id', $list, array('prompt'=>'Select language')); ?>
-		<?php echo $form->error($model,'language_id'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'environment_desc'); ?>
-		<?php echo $form->textArea($model,'environment_desc',array('rows'=>6, 'cols'=>50)); ?>
-		<?php echo $form->error($model,'environment_desc'); ?>
-	</div>
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Submit',array('class' => 'btn btn-success', 'id'=> "btnsubmit", 'name' => 'btnsubmit')); ?>
@@ -61,3 +75,19 @@
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+<script>
+	$(document).ready(function(){
+	
+		$("#Environment_env_title").bind("keyup", function(){
+		   var title1 = document.getElementById("Environment_env_title").value;
+		   var slug = slugify(title1);
+		   jQuery("#Environment_env_slug").val(slug);
+		  });
+					
+		  $("#Environment_env_slug").bind("keyup", function(){
+		   var title2 = document.getElementById("Environment_env_slug").value;
+		   var slug = slugify(title2);
+		   jQuery("#Environment_env_slug").val(slug);
+	});
+})
+</script>

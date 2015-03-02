@@ -33,7 +33,7 @@
 	<div class="row">
 		<?php echo $form->labelEx($model,'environments'); ?>
 		<?php //echo $form->textArea($model,'environments',array('rows'=>6, 'cols'=>50)); ?>
-        <?php $list = CHtml::listData(Environment::model()->findAll(),'environment_id','environment_url');
+        <?php $list = CHtml::listData(Environment::model()->findAll(),'environment_id','env_title');
               echo $form->checkBoxList($model,'environments',$list,array('separator'=>' ', 'labelOptions'=>array('style'=>'display:inline;margin-right: 10px;'))); ?>
 		<?php echo $form->error($model,'environments'); ?>
 	</div>
@@ -57,3 +57,17 @@
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+<script>
+	$(document).ready(function(){
+		$(document).on("change, blur", ".slug-unique", function(){		
+			var lang_id 			= $(this).attr('rel');
+			var id 					= 'EnvironmentContent_'+lang_id+'_env_title_slug_em_mis';
+			var slug	 			= document.getElementById("EnvironmentContent_"+lang_id+"_env_title_slug").value;
+			var primary_table_flag	= 2;			
+			var rid					= '<?php echo (isset($_GET['id']) ? $_GET['id'] : 0); ?>'
+			
+			var result = checkSlugUnique(id,lang_id,slug,primary_table_flag,rid);
+			//var slug = slugify(title1);
+		});		
+	});
+</script>

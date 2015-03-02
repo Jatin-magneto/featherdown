@@ -65,7 +65,7 @@ class EnvironmentController extends Controller
 		$model=new Environment;
         
 		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+		$this->performAjaxValidation($model);
 
 		if(isset($_POST['Environment']))
 		{
@@ -97,7 +97,7 @@ class EnvironmentController extends Controller
 		$model=$this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+		$this->performAjaxValidation($model);
 
 		if(isset($_POST['Environment']))
 		{
@@ -126,7 +126,13 @@ class EnvironmentController extends Controller
 	{
 		try{
 			$id = str_replace('-',',',rtrim($_GET['id'],'-'));
-			Environment::model()->deleteAll("environment_id IN ($id)");
+			$cnt = Environment::model()->deleteEnvironment($id);
+			if(!$cnt) {
+				Environment::model()->deleteAll("environment_id IN ($id)");
+				Yii::app()->user->setFlash('info', "Record has been deleted successfully.");
+			} else {
+				Yii::app()->user->setFlash('error', "Can not delete this record(s). Foreign constraint violation.");
+			}
 			$this->redirect(array('admin'));
 		}catch(CDbException $e){
 			//You can have nother error handling

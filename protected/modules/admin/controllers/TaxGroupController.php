@@ -36,10 +36,10 @@ class TaxGroupController extends Controller
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
-                'actions'=>array('index','view'),
+				'actions'=>array('index','view'),
 				'users'=>array('*'),
 			),
-            array('deny',  // deny all users
+				array('deny',  // deny all users
 				'users'=>array('*'),
 			),
 		);
@@ -63,40 +63,40 @@ class TaxGroupController extends Controller
 	public function actionCreate()
 	{
 		$model=new TaxGroup;
-        $model2 = new EnvironmentContent;
-
+		$model2 = new EnvironmentContent;
+		
 		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
+		//$this->performAjaxValidation($model);
+		
 		if(isset($_POST['TaxGroup']))
 		{
 			$model->attributes=$_POST['TaxGroup'];
-            
-            $user = Yii::app()->user;
-            
-            $model->created_on = new CDbExpression('NOW()');
-            $model->created_by = Yii::app()->user->username;
-	    $model->updated_on = new CDbExpression('NOW()');
+			
+			$user = Yii::app()->user;
+			
+			$model->created_on = new CDbExpression('NOW()');
+			$model->created_by = Yii::app()->user->username;
+			$model->updated_on = new CDbExpression('NOW()');
 			$model->updated_by = Yii::app()->user->username;
-            
-            $model->environments = implode(',',$model->environments);
-            
+			
+			$model->environments = implode(',',$model->environments);
+			
 			if($model->save()){
-                $id = $model->getPrimaryKey();
-                Functions::insertEnvironmentContent($_POST['EnvironmentContent'],$id,'4');
+				$id = $model->getPrimaryKey();
+				Functions::insertEnvironmentContent($_POST['EnvironmentContent'],$id,'4');
 				Yii::app()->user->setFlash('info', "Record has been inserted successfully.");
 				$this->redirect(array('admin'));
-            }
+			}
 			
 		}
 		
 		if(isset($model->environments)){
 			$model->environments = explode(',',$model->environments);
 		}
-
+		
 		$this->render('create',array(
 			'model'=>$model,
-            'model2'=>$model2,
+			'model2'=>$model2,
 		));
 	}
 
@@ -108,34 +108,34 @@ class TaxGroupController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-        $model2=EnvironmentContent::model()->findAll(array('condition'=>"primary_table_id=$id and primary_table_flag=4"));  
-        $model->environments = explode(',',$model->environments);
-
+		$model2=EnvironmentContent::model()->findAll(array('condition'=>"primary_table_id=$id and primary_table_flag=4"));  
+		$model->environments = explode(',',$model->environments);
+		
 		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
+		//$this->performAjaxValidation($model);
+		 
 		if(isset($_POST['TaxGroup']))
 		{
 			$model->attributes=$_POST['TaxGroup'];
-            
-            $user = Yii::app()->user;
-            
-            $model->updated_on = new CDbExpression('NOW()');
-            $model->updated_by = Yii::app()->user->username;
-            $model->environments = implode(',',$model->environments);
-            
+			
+			$user = Yii::app()->user;
+			
+			$model->updated_on = new CDbExpression('NOW()');
+			$model->updated_by = Yii::app()->user->username;
+			$model->environments = implode(',',$model->environments);
+			
 			if($model->save()){
-                $id = $model->getPrimaryKey();
-                Functions::updateEnvironmentContent($_POST['EnvironmentContent'],$id,'4');
+				$id = $model->getPrimaryKey();
+				Functions::updateEnvironmentContent($_POST['EnvironmentContent'],$id,'4');
 				Yii::app()->user->setFlash('info', "Record has been updated successfully.");
 				$this->redirect(array('admin'));
-            }
+			}
 			
 		}
-
+		
 		$this->render('update',array(
 			'model'=>$model,
-            'model2'=>$model2,
+			'model2'=>$model2,
 		));
 	}
 	
@@ -149,6 +149,8 @@ class TaxGroupController extends Controller
 		try{
 			$id = str_replace('-',',',rtrim($_GET['id'],'-'));
 			TaxGroup::model()->deleteAll("tax_group_id IN ($id)");
+			Functions::deleteEnvironmentContent($id,'4');
+			Yii::app()->user->setFlash('info', "Record has been deleted successfully.");
 			$this->redirect(array('admin'));
 		}catch(CDbException $e){
 			//You can have nother error handling

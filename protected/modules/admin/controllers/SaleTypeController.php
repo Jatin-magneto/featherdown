@@ -147,6 +147,7 @@ class SaleTypeController extends Controller
 			$id = str_replace('-',',',rtrim($_GET['id'],'-'));
 			SaleType::model()->deleteAll("sale_type_id IN ($id)");
 			Functions::deleteEnvironmentContent($id,'2');
+			Yii::app()->user->setFlash('info', "Record has been deleted successfully.");
 			$this->redirect(array('admin'));
 		}catch(CDbException $e){
 			//You can have nother error handling

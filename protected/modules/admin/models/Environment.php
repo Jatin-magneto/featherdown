@@ -5,10 +5,6 @@
  *
  * The followings are the available columns in table 'tbl_environment':
  * @property integer $environment_id
- * @property string $environment_name
- * @property string $environment_url
- * @property string $language_id
- * @property string $environment_desc
  * @property string $created_on
  * @property string $created_by
  * @property string $updated_on
@@ -39,12 +35,13 @@ class Environment extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('environment_name, environment_url, language_id, environment_desc', 'required'),
-            array('environment_name, environment_url, created_by, updated_by', 'length', 'max'=>255),
-			array('environment_desc, created_on, updated_on', 'safe'),
+			array('purchase_journal_id, sales_journal_id, debtor_id, account_center_id, account_view_id, env_slug, env_title', 'required'),
+            array('created_by, updated_by, purchase_journal_id, sales_journal_id, debtor_id, account_center_id, account_view_id, env_slug, env_title', 'length', 'max'=>255),
+			array('created_on, updated_on', 'safe'),
+			array('env_slug', 'unique', 'className' => 'Environment', 'attributeName' => 'env_slug', 'message'=>'This slug is already in use'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('environment_id, environment_name, environment_url, language_id, environment_desc, created, updated', 'safe', 'on'=>'search'),
+			array('environment_id, created, updated', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -69,10 +66,13 @@ class Environment extends CActiveRecord
 	{
 		return array(
 			'environment_id' => 'Environment',
-			'environment_name' => 'Environment Name',
-			'environment_url' => 'Environment Url',
-			'language_id' => 'Language ID',
-			'environment_desc' => 'Environment Desc',
+			'env_title' => 'Title',
+			'env_slug' => 'Slug',
+			'account_view_id' => 'AccountView ID',
+			'account_center_id' => 'AccountView Cost Center ID',
+			'debtor_id' => 'Debtor ID',
+			'sales_journal_id' => 'Sales Journal ID',
+			'purchase_journal_id' => 'Purchase Journal ID',
 			'created_on' => 'Created On',
 			'created_by' => 'Created By',
 			'updated_on' => 'Updated On',
@@ -99,10 +99,6 @@ class Environment extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('environment_id',$this->environment_id);
-		$criteria->compare('environment_name',$this->environment_name,true);
-		$criteria->compare('environment_url',$this->environment_url,true);
-		$criteria->compare('language_id',$this->language_id,true);
-		$criteria->compare('environment_desc',$this->environment_desc,true);
 		$criteria->compare('CONCAT(t.created_on,t.created_by)',$this->created,true);
 		$criteria->compare('CONCAT(t.updated_on,t.updated_by)',$this->updated,true);
         
@@ -128,21 +124,28 @@ class Environment extends CActiveRecord
 	public function deleteEnvironment($id){
 		
 		
-		$sql 	= "SELECT COUNT(created_by) AS cnt FROM tbl_environment WHERE FIND_IN_SET($id, environments)";
+		$sql 	= "SELECT environments AS cnt FROM tbl_country WHERE environments in ($id)";
 		$sql   .= " UNION ";
-		$sql   .= "SELECT COUNT(created_by) AS cnt FROM tbl_environment WHERE FIND_IN_SET($id, environments)";
+		$sql   .= "SELECT environments AS cnt FROM tbl_province WHERE environments in ($id)";
 		$sql   .= " UNION ";
-		$sql   .= "SELECT COUNT(created_by) AS cnt FROM tbl_environment WHERE FIND_IN_SET($id, environments)";
+		$sql   .= "SELECT environments AS cnt FROM tbl_city WHERE environments in ($id)";
 		$sql   .= " UNION ";
-		$sql   .= "SELECT COUNT(created_by) AS cnt FROM tbl_environment WHERE FIND_IN_SET($id, environments)";
+		$sql   .= "SELECT environments AS cnt FROM tbl_sale_type WHERE environments in ($id)";
 		$sql   .= " UNION ";
-		$sql   .= "SELECT COUNT(created_by) AS cnt FROM tbl_environment WHERE FIND_IN_SET($id, environments)";
+		$sql   .= "SELECT environments AS cnt FROM tbl_tax WHERE environments in ($id)";
+		$sql   .= " UNION ";
+		$sql   .= "SELECT environments AS cnt FROM tbl_tax_group WHERE environments in ($id)";
+		$sql   .= " UNION ";
+		$sql   .= "SELECT environments AS cnt FROM tbl_email_settings WHERE environments in ($id)";
+		$sql   .= " UNION ";
+		$sql   .= "SELECT environments AS cnt FROM tbl_locale WHERE environments in ($id)";
+		$sql   .= " UNION ";
+		$sql   .= "SELECT environments AS cnt FROM tbl_sale_channel_type WHERE environments in ($id)";
 		
 		$connection	= Yii::app()->db;
-		$command	= $connection->createCommand($sql);
-		$rowCount	= $command->execute();
-		$dataReader	= $command->query();
-
+		$result		= $connection->createCommand($sql)->queryAll();
+		
+		return count($result);
 	}
 
 	/**

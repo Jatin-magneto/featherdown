@@ -31,7 +31,7 @@ $list = CHtml::listData(Language::model()->findAll(),'language_id','name');
             <div role="tabpanel" class="tab-pane <?php echo ($i==0)?'active':''; ?>" id="<?php echo str_replace(' ', '_', $lang); ?>">
             <div class="row">
             	<?php echo $form->labelEx($model,"[$key]env_title"); ?>
-            	<?php echo $form->textField($model,"[$key]env_title",array('size'=>60,'maxlength'=>500)); ?>
+            	<?php echo $form->textField($model,"[$key]env_title",array('size'=>60,'maxlength'=>500,'rel'=>$key, 'class'=>'slug-unique')); ?>
             	<?php echo $form->error($model,"[$key]env_title"); ?>
             </div>
             
@@ -43,8 +43,9 @@ $list = CHtml::listData(Language::model()->findAll(),'language_id','name');
             
             <div class="row">
             	<?php echo $form->labelEx($model,"[$key]env_title_slug"); ?>
-            	<?php echo $form->textField($model,"[$key]env_title_slug",array('size'=>60,'maxlength'=>500)); ?>
+            	<?php echo $form->textField($model,"[$key]env_title_slug",array('size'=>60,'maxlength'=>500,'rel'=>$key, 'class'=>'slug-unique slug-value')); ?>
             	<?php echo $form->error($model,"[$key]env_title_slug"); ?>
+		<div style="display:none" id="EnvironmentContent_<?php echo $key; ?>_env_title_slug_em_mis" class="errorMessage">This slug is already in use</div>
             </div>
             
             <div class="row">

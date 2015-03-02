@@ -138,6 +138,7 @@ class EmailSettingsController extends Controller
 		try{
 			$id = str_replace('-',',',rtrim($_GET['id'],'-'));
 			EmailSettings::model()->deleteAll("email_settings_id IN ($id)");
+			Yii::app()->user->setFlash('info', "Record has been deleted successfully.");
 			$this->redirect(array('admin'));
 		}catch(CDbException $e){
 			//You can have nother error handling

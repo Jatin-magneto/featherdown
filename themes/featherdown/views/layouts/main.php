@@ -43,7 +43,8 @@ Yii::app()->clientScript->registerScript(
 ?>
 <script type="text/javascript">
 	// Dont remove uniqueURL variable.
-	var uniqueURL = '<?php echo Yii::app()->baseUrl.'/'.$this->uniqueid; ?>';
+	var uniqueURL 	= '<?php echo Yii::app()->baseUrl.'/'.$this->uniqueid; ?>';
+	var baseURL		= '<?php echo Yii::app()->baseUrl.'/'; ?>';
 	function updateEnvironment(id){
         jQuery.ajax({
             data: {environment_id : id},
@@ -115,11 +116,11 @@ Yii::app()->clientScript->registerScript(
       </button>
       <a class="navbar-brand" href="<?php echo $this->createUrl('/site') ?>"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/admin-logo.png" alt=""/></a> </div>
     <!-- Top Menu Items -->
-    <?php $list = CHtml::listData(Environment::model()->findAll(),'environment_id','environment_url'); ?>
+    <?php $list = CHtml::listData(Environment::model()->findAll(),'environment_id','env_title'); ?>
     <ul class="nav navbar-right top-nav">
-      <li class="dropdown"> <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i class="fa fa-globe"></i><?php echo (Yii::app()->session['environment_url'] != '')? '  '. Yii::app()->session['environment_url']:'  Domain'; ?><b class="caret"></b></a>
+      <li class="dropdown"> <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i class="fa fa-globe"></i><?php echo (Yii::app()->session['env_title'] != '')? '  '. Yii::app()->session['env_title']:'  Domain'; ?><b class="caret"></b></a>
         <ul class="dropdown-menu domain-dropdown">
-            <li> <?php echo CHtml::link("All Domains (All)","",array('onclick'=>"{updateEnvironment('');}")); ?> </li>
+            <li> <?php echo CHtml::link("All Domains","",array('onclick'=>"{updateEnvironment('');}")); ?> </li>
         <?php foreach($list as $key => $val){ 
             $active = (Yii::app()->session['environment_id'] == $key)?'active':'';
             ?>
@@ -155,6 +156,7 @@ Yii::app()->clientScript->registerScript(
                     <li><a href="<?php echo $this->createUrl('/admin/country/admin') ?>">Country</a></li>
                     <li><a href="<?php echo $this->createUrl('/admin/city/admin') ?>">City</a></li>
                     <li><a href="<?php echo $this->createUrl('/admin/province/admin') ?>">Province</a></li>
+		    <li><a href="<?php echo $this->createUrl('/admin/region/admin') ?>">Region</a></li>
                     <li><a href="javascript:void(0)">Location</a></li>
                     <li><a href="javascript:void(0)">User Permission</a></li>
                 </ul>
@@ -185,9 +187,11 @@ Yii::app()->clientScript->registerScript(
                     <li><a href="<?php echo $this->createUrl('/admin/taxGroup/admin') ?>">Tax Group</a></li>
                     <li><a href="<?php echo $this->createUrl('/admin/paymentType/admin') ?>">Payment Type</a></li>
                     <li><a href="<?php echo $this->createUrl('/admin/saleType/admin') ?>">Sale Type</a></li>
-                    <li><a href="<?php echo $this->createUrl('/admin/saleChannelType/admin') ?>">Sale Channel Type</a></li>
+                    <li><a href="<?php echo $this->createUrl('/admin/saleChannelType/admin') ?>">Sale Channel</a></li>
                     <li><a href="<?php echo $this->createUrl('/admin/bookingPaymentRules/admin') ?>">Payment Rules</a></li>
                     <li><a href="<?php echo $this->createUrl('/admin/tax/admin') ?>">Tax</a></li>
+		    <li><a href="<?php echo $this->createUrl('/account/ledger/admin') ?>">Ledger</a></li>
+		    <li><a href="<?php echo $this->createUrl('/account/ledgerCategory/admin') ?>">Ledger Category</a></li>
                     <li><a href="javascript:void(0)">Submenu</a></li>
                   </ul>
                 </li>

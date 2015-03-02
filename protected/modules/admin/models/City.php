@@ -121,8 +121,8 @@ class City extends CActiveRecord
 		$criteria->compare('CONCAT(t.created_on,t.created_by)',$this->created,true);
 		$criteria->compare('CONCAT(t.updated_on,t.updated_by)',$this->updated,true);
         
-	$environment_cond = Yii::app()->session['environment_cond'];
-        $criteria->addCondition("$environment_cond");
+		$environment_cond = Yii::app()->session['environment_cond'];
+		$criteria->addCondition("$environment_cond");
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

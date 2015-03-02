@@ -48,9 +48,7 @@ class UserIdentity extends CUserIdentity
 			$this->setState('full_name', $record['first_name'].' '.$record['last_name']);
 			
 			Yii::app()->session['environment_id'] = '';
-			Yii::app()->session['environment_name'] = '';
-			Yii::app()->session['language_id'] = '';
-			Yii::app()->session['environment_url'] = '';
+			Yii::app()->session['env_title'] = '';
 			Yii::app()->session['environment_cond'] = "true";
 			
 			$this->errorCode=self::ERROR_NONE;

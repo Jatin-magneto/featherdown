@@ -19,7 +19,11 @@ return array(
 		'application.models.*',
 		'application.components.*',
         'application.modules.admin.models.*',
-        'application.modules.admin.components.*',    
+        'application.modules.admin.components.*',
+        'application.modules.product.models.*',
+        'application.modules.product.components.*',
+        'application.modules.account.models.*',
+        'application.modules.account.components.*',   
 	),
 
 	'modules'=>array(
@@ -27,6 +31,7 @@ return array(
 		'admin',
                 'product',
                 'supplier',
+                'account',
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',
 			'password'=>'test',

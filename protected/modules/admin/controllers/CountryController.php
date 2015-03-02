@@ -28,7 +28,7 @@ class CountryController extends Controller
 	{
 		return array(
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','dynamicprovince','dynamicprovincecity'),
+				'actions'=>array('create','update','dynamicprovince','dynamicprovincecity','dynamicprovinceregion'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -137,6 +137,7 @@ class CountryController extends Controller
 		try{
 			$id = str_replace('-',',',rtrim($_GET['id'],'-'));
 			Country::model()->deleteAll("country_id IN ($id)");
+			Yii::app()->user->setFlash('info', "Record has been deleted successfully.");
 			$this->redirect(array('admin'));
 		}catch(CDbException $e){
 			//You can have nother error handling
@@ -232,6 +233,21 @@ class CountryController extends Controller
     public function actionDynamicprovincecity()
     {   
         $country_id = $_POST['City']['country_id'];
+        $environment_cond = Yii::app()->session['environment_cond'];
+        $data=Province::model()->findAll(array("condition" => "country_id = $country_id and $environment_cond"));
+     
+        $data=CHtml::listData($data,'province_id','province_name');
+        echo CHtml::tag('option',array('value'=>''),CHtml::encode('Select Province'),true);
+        foreach($data as $value=>$name)
+        {
+            echo CHtml::tag('option',
+                       array('value'=>$value),CHtml::encode($name),true);
+        }
+    }
+    
+    public function actionDynamicprovinceregion()
+    {   
+        $country_id = $_POST['Region']['country_id'];
         $environment_cond = Yii::app()->session['environment_cond'];
         $data=Province::model()->findAll(array("condition" => "country_id = $country_id and $environment_cond"));
      

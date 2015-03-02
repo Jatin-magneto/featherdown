@@ -3,15 +3,15 @@
 /* @var $model SaleChannelType */
 
 $this->breadcrumbs=array(
-	'Sale Channel Types'=>array('admin'),
+	'Sale Channels'=>array('admin'),
 	'Manage',
 );
 
 $this->menu=array(
 	////array('label'=>'List SaleChannelType', 'url'=>array('index')),
-	array('label'=>'<i class="fa fa-plus-circle"></i> Add Sales Channel', 'url'=>array('create')),
-	array('label'=>'<i class="fa fa-pencil-square-o"></i> Edit Sales Channel', 'url'=>array('#')),
-	array('label'=>'<i class="fa fa-trash"></i> Delete Sales Channel', 'url'=>array('#')),
+	array('label'=>'<i class="fa fa-plus-circle"></i> Add Sale Channel', 'url'=>array('create')),
+	array('label'=>'<i class="fa fa-pencil-square-o"></i> Edit Sale Channel', 'url'=>array('#')),
+	array('label'=>'<i class="fa fa-trash"></i> Delete Sale Channel', 'url'=>array('#')),
 );
 
 Yii::app()->clientScript->registerScript('search', "

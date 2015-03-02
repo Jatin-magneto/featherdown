@@ -28,13 +28,11 @@ $('.search-form form').submit(function(){
 ?>
 
 <h1>Manage Products</h1>
-
 <?php
-if(isset($_GET['Err'])){
-	echo ($_GET['Err'] == 'DeleteErr')?'<script>alert("Can not delete this record(s). Foreign constraint violation.");</script>':'';	
-}
+    foreach(Yii::app()->user->getFlashes() as $key => $message) {
+        echo '<div class="alert alert-link alert-' . $key . '">' . $message . "</div>\n";
+    }
 ?>
-
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'product-grid',
 	'itemsCssClass' => 'table table-striped table-bordered table-hover',
