@@ -83,18 +83,19 @@ class SaleChannelType extends CActiveRecord
 	public function search()
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
-
+		
 		$criteria=new CDbCriteria;
-
+		
 		$criteria->compare('sale_channel_type_id',$this->sale_channel_type_id);
-        $criteria->compare('title',$this->title,true);
+		$criteria->compare('title',$this->title,true);
 		$criteria->compare('isactive',$this->isactive,true);
 		$criteria->compare('environments',$this->environments,true);
 		$criteria->compare('CONCAT(t.created_on,t.created_by)',$this->created,true);
 		$criteria->compare('CONCAT(t.updated_on,t.updated_by)',$this->updated,true);
-        $environment_cond = Yii::app()->session['environment_cond'];
-        $criteria->addCondition("$environment_cond");
-
+		
+		$environment_cond = Yii::app()->session['environment_cond'];
+		$criteria->addCondition("$environment_cond");
+		
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 			'sort'=>array(

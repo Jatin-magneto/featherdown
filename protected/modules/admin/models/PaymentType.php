@@ -59,7 +59,7 @@ class PaymentType extends CActiveRecord
 		return array(
 			'pay_type_id' => 'Payment Type',
 			'title' => 'Title',
-			'environments' => 'Select Environments',
+			'environments' => 'Environments',
 			'isactive' => 'Is Active',
 			'created_on' => 'Created On',
 			'created_by' => 'Created By',

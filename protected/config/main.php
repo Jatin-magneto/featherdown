@@ -18,12 +18,16 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
-        'application.modules.admin.models.*',
-        'application.modules.admin.components.*',
-        'application.modules.product.models.*',
-        'application.modules.product.components.*',
-        'application.modules.account.models.*',
-        'application.modules.account.components.*',   
+                'application.modules.admin.models.*',
+                'application.modules.admin.components.*',
+                'application.modules.product.models.*',
+                'application.modules.product.components.*',
+                'application.modules.account.models.*',
+                'application.modules.account.components.*',
+                'application.modules.location.models.*',
+                'application.modules.location.components.*',
+                'application.modules.supplier.models.*',
+                'application.modules.supplier.components.*',
 	),
 
 	'modules'=>array(
@@ -32,6 +36,7 @@ return array(
                 'product',
                 'supplier',
                 'account',
+                'location',
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',
 			'password'=>'test',
@@ -65,7 +70,7 @@ return array(
 		// database settings are configured in database.php
 		//'db'=>require(dirname(__FILE__).'/database.php'),
 		 'db'=>array(
-                    'connectionString' => 'mysql:host=192.168.1.14;dbname=feather_down_v1',
+                    'connectionString' => 'mysql:host=192.168.2.13;dbname=featherdown_v1',
                     'emulatePrepare' => true,
                     'username' => 'root',
                     'password' => '',

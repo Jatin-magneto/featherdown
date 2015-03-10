@@ -13,8 +13,8 @@
 	// There is a call to performAjaxValidation() commented in generated controller code.
 	// See class documentation of CActiveForm for details on this.
 	'enableAjaxValidation'=>true,
-    'enableClientValidation'=>true,
-    'clientOptions'=> array(
+	'enableClientValidation'=>true,
+	'clientOptions'=> array(
         'validateOnSubmit'=>true,
         'afterValidate'=>'js:function(form, data, hasError) {if (!hasError){ $.blockUI(); return true; }}',
     ),

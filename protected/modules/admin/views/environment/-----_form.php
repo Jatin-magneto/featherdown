@@ -22,14 +22,14 @@
 <?php
 	$tabs = array();
 
-	$tabs['Environment'] = array(
-	'id'=>'environmentTab',
-	'content'=>$this->renderPartial('_formEnvironment', array(
-	'form' => $form,
-	'model'=>$model,
-	),
-	true),
-	);
+	//$tabs['Environment'] = array(
+	//'id'=>'environmentTab',
+	//'content'=>$this->renderPartial('_formEnvironment', array(
+	//'form' => $form,
+	//'model'=>$model,
+	//),
+	//true),
+	//);
 	
 	$tabs['Administration'] = array(
 	'id'=>'linkedAdministrationTab',
@@ -63,7 +63,7 @@
 <script>
 	$(document).ready(function(){
 		
-		$('#btnsubmit').click(function(){			
+		$('#btnsubmit').click(function(){
 			if ($.trim($('#Environment_env_title').val()) == '' || $.trim($('#Environment_env_slug').val())== '' || $.trim($('#Environment_account_view_id').val())== '' || $.trim($('#Environment_account_center_id').val())== '' || $.trim($('#Environment_debtor_id').val())== '' || $.trim($('#Environment_sales_journal_id').val())== '' || $.trim($('#Environment_purchase_journal_id').val())== '') {
 				$("#ui-id-1").parent().removeClass('ui-tabs-active ui-state-active');
 				$("#ui-id-1").parent().attr('tabindex',"-1");

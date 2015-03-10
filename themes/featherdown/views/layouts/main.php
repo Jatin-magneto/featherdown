@@ -91,7 +91,7 @@ Yii::app()->clientScript->registerScript(
   </script>
 </head>
 
-<?php if(!Yii::app()->user->isGuest) { ?>
+<?php if(!Yii::app()->user->isGuest || Yii::app()->errorHandler->error) { ?>
 <body>
 <?php } else { ?>
 <body class="login">
@@ -142,10 +142,15 @@ Yii::app()->clientScript->registerScript(
               <ul class="nav navbar-nav mainMenu">
                 <li><a href="<?php echo $this->createUrl('/site') ?>">Dashboard</a></li>
                 <li class="dropdown">
-                  <a href="javascript:void(0)" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown">Content <b class="caret"></b></a>
+                  <a href="javascript:void(0)" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown">Global <b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li><a href="javascript:void(0)">Submenu</a></li>
-                    <li><a href="javascript:void(0)">Submenu</a></li>
+                    <li><a href="<?php echo $this->createUrl('/admin/region/admin') ?>">Region</a></li>
+		    <li><a href="<?php echo $this->createUrl('/admin/country/admin') ?>">Country</a></li>
+                    <li><a href="<?php echo $this->createUrl('/admin/city/admin') ?>">City</a></li>
+                    <li><a href="<?php echo $this->createUrl('/admin/province/admin') ?>">Province</a></li>
+		    <li><a href="<?php echo $this->createUrl('/admin/saleType/admin') ?>">Sale Type</a></li>
+                    <li><a href="<?php echo $this->createUrl('/admin/saleChannelType/admin') ?>">Sale Channel</a></li>
+		    <li><a href="<?php echo $this->createUrl('/admin/emailSettings/admin') ?>">Email Settings</a></li>
                   </ul>
                 </li>
                 <li class="dropdown">
@@ -153,20 +158,16 @@ Yii::app()->clientScript->registerScript(
                   <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
                     <li><a href="<?php echo $this->createUrl('/product/productCategory/admin') ?>">Product Category</a></li>
                     <li><a href="<?php echo $this->createUrl('/product/product/admin') ?>">Product</a></li>
-                    <li><a href="<?php echo $this->createUrl('/admin/country/admin') ?>">Country</a></li>
-                    <li><a href="<?php echo $this->createUrl('/admin/city/admin') ?>">City</a></li>
-                    <li><a href="<?php echo $this->createUrl('/admin/province/admin') ?>">Province</a></li>
-		    <li><a href="<?php echo $this->createUrl('/admin/region/admin') ?>">Region</a></li>
-                    <li><a href="javascript:void(0)">Location</a></li>
-                    <li><a href="javascript:void(0)">User Permission</a></li>
+                    <li><a href="<?php echo $this->createUrl('/location/locationType/admin') ?>">Location Type</a></li>
+		    <li><a href="<?php echo $this->createUrl('/location/location/admin') ?>">Location</a></li>
                 </ul>
                 </li>
                 <li class="dropdown">
-                  <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Security System <b class="caret"></b></a>
+                  <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">User <b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li><a href="javascript:void(0)">Submenu</a></li>
-                    <li><a href="javascript:void(0)">Submenu</a></li>
-                    <li><a href="javascript:void(0)">Submenu </a></li>
+                    <li><a href="<?php echo $this->createUrl('/supplier/supplier/admin') ?>">Supplier</a></li>
+		    <li><a href="<?php echo $this->createUrl('/location/owner/admin') ?>">Location Owner</a></li>
+                    <li><a href="javascript:void(0)">User Permission</a></li>
                   </ul>
                 </li>
                 <li class="dropdown">
@@ -176,7 +177,6 @@ Yii::app()->clientScript->registerScript(
                     <li><a href="<?php echo $this->createUrl('/admin/language/admin') ?>">Language</a></li>
 		    <li><a href="<?php echo $this->createUrl('/admin/currency/admin') ?>">Currency</a></li>
 		    <li><a href="<?php echo $this->createUrl('/admin/locale/admin') ?>">Locale</a></li>
-		    <li><a href="<?php echo $this->createUrl('/admin/emailSettings/admin') ?>">Email Settings</a></li>
                   </ul>
                 </li>
                 
@@ -184,15 +184,12 @@ Yii::app()->clientScript->registerScript(
                 <li class="dropdown">
                   <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Accounting <b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li><a href="<?php echo $this->createUrl('/admin/taxGroup/admin') ?>">Tax Group</a></li>
-                    <li><a href="<?php echo $this->createUrl('/admin/paymentType/admin') ?>">Payment Type</a></li>
-                    <li><a href="<?php echo $this->createUrl('/admin/saleType/admin') ?>">Sale Type</a></li>
-                    <li><a href="<?php echo $this->createUrl('/admin/saleChannelType/admin') ?>">Sale Channel</a></li>
-                    <li><a href="<?php echo $this->createUrl('/admin/bookingPaymentRules/admin') ?>">Payment Rules</a></li>
-                    <li><a href="<?php echo $this->createUrl('/admin/tax/admin') ?>">Tax</a></li>
-		    <li><a href="<?php echo $this->createUrl('/account/ledger/admin') ?>">Ledger</a></li>
+                    <li><a href="<?php echo $this->createUrl('/account/ledger/admin') ?>">Ledger</a></li>
 		    <li><a href="<?php echo $this->createUrl('/account/ledgerCategory/admin') ?>">Ledger Category</a></li>
-                    <li><a href="javascript:void(0)">Submenu</a></li>
+		    <li><a href="<?php echo $this->createUrl('/admin/tax/admin') ?>">Tax</a></li>
+		    <li><a href="<?php echo $this->createUrl('/admin/taxGroup/admin') ?>">Tax Group</a></li>
+                    <li><a href="<?php echo $this->createUrl('/admin/paymentType/admin') ?>">Payment Type</a></li>
+                    <li><a href="<?php echo $this->createUrl('/admin/bookingPaymentRules/admin') ?>">Payment Rules</a></li>
                   </ul>
                 </li>
                 

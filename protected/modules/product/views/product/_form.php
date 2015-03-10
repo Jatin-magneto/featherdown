@@ -17,7 +17,7 @@
 	'enableClientValidation'=>true,
 	'clientOptions'=> array(
 	'validateOnSubmit'=>true,
-	'afterValidate'=>'js:function(form, data, hasError) {if (!hasError){ $.blockUI(); return true; }}',
+	'afterValidate'=>'js:function(form, data, hasError) {if (!hasError){ $.blockUI(); return true; } else {my_custom_validation()}}',
 	),
 )); ?>
 
@@ -76,4 +76,17 @@
 			//var slug = slugify(title1);
 		});		
 	});
+	
+	function my_custom_validation(){
+		
+		if ($('#Product_product_category_id_em_').css('display') == 'block' || $('#Product_ledger_category_id_em_').css('display') == 'block' || $('#Product_product_code_em_').css('display') == 'block' || $('#Product_title_em_').css('display') == 'block' || $('#Product_allow_max_persons_em_').css('display') == 'block' || $('#Product_allow_max_adults_em_').css('display') == 'block' || $('#Product_per_day_em_').css('display') == 'block'
+		    || $('#Product_per_day_stay_em_').css('display') == 'block'
+		    || $('#Product_travel_sum_em_').css('display') == 'block'
+		    || $('#Product_image_em_').css('display') == 'block'
+		    || $('#Product_environments_em_').css('display') == 'block'
+		    || $('#Product_isactive_em_').css('display') == 'block'
+		    ) {
+			$('#ui-id-1').trigger('click');
+		}
+	}
 </script>

@@ -36,10 +36,10 @@ class SaleChannelTypeController extends Controller
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
-                'actions'=>array('index','view'),
+				'actions'=>array('index','view'),
 				'users'=>array('*'),
 			),
-            array('deny',  // deny all users
+			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
 		);
@@ -192,7 +192,7 @@ class SaleChannelTypeController extends Controller
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['SaleChannelType']))
 			$model->attributes=$_GET['SaleChannelType'];
-
+			
 		$this->render('admin',array(
 			'model'=>$model,
 		));

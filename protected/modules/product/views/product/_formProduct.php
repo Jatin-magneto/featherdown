@@ -10,7 +10,7 @@
 	
 	<div class="row">
 		<?php echo $form->labelEx($model,'ledger_category_id'); ?>
-		<?php echo $form->dropDownList($model, 'ledger_category_id',CHtml::listData(LedgerCategory::model()->findAll(array('condition'=>"$environment_cond")),'ledger_category_id','ledger_cat_title'),array('class'=>'span3', 'prompt' => 'Select Ledger Category')); ?>
+		<?php echo $form->dropDownList($model, 'ledger_category_id',CHtml::listData(LedgerCategory::model()->findAll(),'ledger_category_id','ledger_category_id'),array('class'=>'span3', 'prompt' => 'Select Ledger Category')); ?>
 		<?php echo $form->error($model,'ledger_category_id'); ?>
 	</div>
 

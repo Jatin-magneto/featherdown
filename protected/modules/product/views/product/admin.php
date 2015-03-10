@@ -59,13 +59,13 @@ $('.search-form form').submit(function(){
 		),
 		array(
 			'header' => 'Created On',
-            'name'=>'created',
+			'name'=>'created',
 			'value'=>'Yii::app()->dateFormatter->format("MM-dd-yyyy HH:mm:ss",strtotime($data->created_on)) . " By " . $data->created_by'
-        ),
-        array(
-            'header'=>'Updated On',
+		),
+		array(
+			'header'=>'Updated On',
 			'name'=> 'updated',
 			'value'=>'Yii::app()->dateFormatter->format("MM-dd-yyyy HH:mm:ss",strtotime($data->updated_on)) . " By " . $data->updated_by'            
-        ),		
+		),		
 	),
 )); ?>

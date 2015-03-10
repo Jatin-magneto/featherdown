@@ -45,6 +45,10 @@ class SiteController extends Controller
 				echo $error['message'];
 			else
 				$this->render('error', $error);
+			//elseif($error['code'] == 404)
+			//	$this->render('error404', $error);
+			//else
+			//	$this->render('error404', $error);
 		}
 	}
 
