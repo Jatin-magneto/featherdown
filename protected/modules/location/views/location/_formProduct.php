@@ -1,235 +1,93 @@
-<div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button aria-label="Close" data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span></button>
-                        <h4 id="myModalLabel" class="modal-title">Add Product</h4>
-                      </div>
-                      <div class="modal-body">
-                        <!--tabs start here-->
-                        <div role="tabpanel">
-                          <!-- Nav tabs -->
-                          <ul role="tablist" class="nav nav-tabs">
-                            <li class="active" role="presentation"><a data-toggle="tab" role="tab" aria-controls="availability" href="#availability" aria-expanded="true">Availability</a></li>
-                            <li role="presentation"><a data-toggle="tab" role="tab" aria-controls="sales" href="#sales" aria-expanded="true">Sales</a></li>
-                            <li role="presentation"><a data-toggle="tab" role="tab" aria-controls="purchase" href="#purchase" aria-expanded="true">Purchase</a></li>
-                          </ul>
-                        
-                          <!-- Tab panes -->
-                          <div class="tab-content">
-                            <div id="availability" class="tab-pane active" role="tabpanel">
-                            	<form class="form-horizontal">
-                          <div class="form-group">
-                            <label class="col-sm-4 control-label">Product</label>
-                            <div class="col-sm-7">
-                              <select class="form-control">
-                                <option>Select product</option>
-                                <option>_Discount 10£</option>
-                                <option>_Discount 20£</option>
-                                <option>_Discount 30£</option>
-                                <option>_Discount 40£</option>
-                                <option>_Discount 50£</option>
-                              </select>
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-sm-4 control-label">From</label>
-                            <div class="col-sm-7">
-                              <input type="text" placeholder="" class="form-control date-picker hasDatepicker" id="dp1425888007168">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-sm-4 control-label">Until</label>
-                            <div class="col-sm-7">
-                              <input type="text" placeholder="" class="form-control date-picker hasDatepicker" id="dp1425888007169">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-sm-4 control-label">Quantity</label>
-                            <div class="col-sm-7">
-                              <input type="text" class="form-control small" placeholder="0">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-sm-4 control-label">Type</label>
-                            <div class="col-sm-7">
-                              <select class="form-control">
-                                <option>N/A</option>
-                                <option>Option 1</option>
-                                <option>Option 1</option>
-                              </select>
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-sm-4 control-label">Special Type</label>
-                            <div class="col-sm-7">
-                              <select class="form-control">
-                                <option>Select Special Type</option>
-                                <option>2 Night Weekday</option>
-                                <option>3 Night Weekday</option>
-                                <option>4 Night Weekday</option>
-                              </select>
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-sm-4 control-label">Days</label>
-                            <div class="col-sm-7">
-                              <label class="checkbox-inline">
-                                <input type="checkbox" value="option1" name="checkbox">
-                                zondag </label>
-                              <label class="checkbox-inline">
-                                <input type="checkbox" value="option2" name="checkbox">
-                                maandag </label>
-                                <label class="checkbox-inline">
-                                <input type="checkbox" value="option2" name="checkbox">
-                                dinsdag </label>
-                                <label class="checkbox-inline">
-                                <input type="checkbox" value="option2" name="checkbox">
-                                woensdag </label>
-                                <label class="checkbox-inline">
-                                <input type="checkbox" value="option2" name="checkbox">
-                                donderdag </label>
-                                <label class="checkbox-inline">
-                                <input type="checkbox" value="option2" name="checkbox">
-                                vrijdag </label>
-                                <label class="checkbox-inline">
-                                <input type="checkbox" value="option2" name="checkbox">
-                                zaterdag </label>
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-sm-4 control-label">Nights</label>
-                            <div class="col-sm-7">
-                              <input type="text" class="form-control small" placeholder="1">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-sm-4 control-label">Mandatory</label>
-                            <div class="col-sm-7">
-                              <label class="radio-inline">
-                                <input type="radio" value="option1" name="radio">
-                                Ja </label>
-                              <label class="radio-inline">
-                                <input type="radio" value="option2" name="radio">
-                                Nee </label>
-                            </div>
-                          </div>
-                        </form>
-                            </div>
-                            <div id="sales" class="tab-pane" role="tabpanel">
-                            	<form class="form-horizontal">
-                              <div class="form-group">
-                            <label class="col-sm-4 control-label">Price</label>
-                            <div class="col-sm-7">
-                              <input type="text" class="form-control " placeholder="Price">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-sm-4 control-label">Price unit</label>
-                            <div class="col-sm-7">
-                              <select class="form-control">
-                                <option>Select Price unit</option>
-                                <option>Per day</option>
-                                <option>Per hour</option>
-                              </select>
-                            </div>
-                          </div>
-                          
-                          <div class="form-group">
-                            <label class="col-sm-4 control-label">Max quantity</label>
-                            <div class="col-sm-7">
-                              <input type="text" class="form-control " placeholder="Max quantity">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-sm-4 control-label">Max quantity unit</label>
-                            <div class="col-sm-7">
-                              <select class="form-control">
-                                <option>Max quantity unit</option>
-                                <option>Per day</option>
-                                <option>Per hour</option>
-                              </select>
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-sm-4 control-label">Percentage</label>
-                            <div class="col-sm-7">
-                              <input type="text" class="form-control " placeholder="0">
-                            </div>
-                          </div>
-                          
-                          <div class="form-group">
-                            <label class="col-sm-4 control-label">Sale Type</label>
-                            <div class="col-sm-7">
-                              <label class="checkbox-inline">
-                                <input type="checkbox" value="option1" name="checkbox">
-                                Office </label>
-                              <label class="checkbox-inline">
-                                <input type="checkbox" value="option2" name="checkbox">
-                                Website </label>
-                                
-                            </div>
-                          </div>
-                          
-                          <div class="form-group">
-                            <label class="col-sm-4 control-label">Primary process</label>
-                            <div class="col-sm-7">
-                              <label class="radio-inline">
-                                <input type="radio" value="option1" name="radio1">
-                                Ja </label>
-                              <label class="radio-inline">
-                                <input type="radio" value="option2" name="radio1">
-                                Nee </label>
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-sm-4 control-label">Secondary process</label>
-                            <div class="col-sm-7">
-                              <label class="radio-inline">
-                                <input type="radio" value="option1" name="radio">
-                                Ja </label>
-                              <label class="radio-inline">
-                                <input type="radio" value="option2" name="radio">
-                                Nee </label>
-                            </div>
-                          </div>
-                        </form>
-                            </div>
-                            <div id="purchase" class="tab-pane" role="tabpanel">
-                            	<form class="form-horizontal">
-                                  <div class="form-group">
-                                <label class="col-sm-4 control-label">Purchase price</label>
-                                <div class="col-sm-7">
-                                  <input type="text" class="form-control " placeholder="0">
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                <label class="col-sm-4 control-label">Purchase price unit</label>
-                                <div class="col-sm-7">
-                                  <select class="form-control">
-                                    <option>Purchase price unit</option>
-                                    <option>Per day</option>
-                                    <option>Per hour</option>
-                                  </select>
-                                </div>
-                              </div>
-                              
-                              <div class="form-group">
-                                <label class="col-sm-4 control-label">Purchase percentage</label>
-                                <div class="col-sm-7">
-                                  <input type="text" class="form-control " placeholder="0">
-                                </div>
-                              </div>
-                              
-                            </form>
-                            </div>
-                          </div>
-                        
-                        </div>
-                        <!--tabs end here-->
-                      </div>
-                      <div class="modal-footer">
-                        <button class="btn btn-success" type="button">Save</button>
-                        <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
-                      </div>
-                    </div>
-                  </div>
+ <?php
+/* @var $this LocationProductController */
+/* @var $model LocationProduct */
+/* @var $form CActiveForm */
+?>
+
+<div class="form">
+
+<?php $form=$this->beginWidget('CActiveForm', array(
+	'id'=>'location-product-form',
+	'action' => Yii::app()->createUrl('location/location/addProduct'),  //<- your form action here
+	// Please note: When you enable ajax validation, make sure the corresponding
+	// controller action is handling ajax validation correctly.
+	// There is a call to performAjaxValidation() commented in generated controller code.
+	// See class documentation of CActiveForm for details on this.
+	'enableAjaxValidation'=>false,
+	'enableClientValidation'=>true,
+	'clientOptions'=> array(
+	'validateOnSubmit'=>true,
+	'afterValidate'=>'js:function(form, data, hasError) {if (!hasError){ $.blockUI(); return true; } else {my_custom_validation()}}',
+	),
+)); ?>
+
+<?php
+	$tabs = array();
+
+	$tabs['Availability'] = array(
+	'id'=>'availabilityTab',
+	'content'=>$this->renderPartial('_formAvailability', array(
+	'form' => $form,
+	'model_lp'=>$model_lp,
+	),
+	true),
+	);
+	
+	$tabs['Sales'] = array(
+	'id'=>'salesTab',
+	'content'=>$this->renderPartial('_formSales', array(
+	'form' => $form,
+	'model_lp'=>$model_lp,
+	'model_ls'=>$model_ls,
+	),
+	true),
+	);
+	
+	$tabs['Purchase'] = array(
+	'id'=>'purchaseTab',
+	'content'=>$this->renderPartial('_formPurchase', array(
+	'form' => $form,
+	'model_lp'=>$model_lp,
+	),
+	true),
+	);
+	
+	$this->widget('zii.widgets.jui.CJuiTabs', array(
+	'tabs' => $tabs,
+	'options' => array(
+	'collapsible' => false,
+	),
+	));
+?>
+
+	<div class="row buttons">
+		<?php echo CHtml::submitButton('Submit',array('class' => 'btn btn-success', 'id'=> "btnsubmit", 'name' => 'btnsubmit')); ?>
+		<?php if(Yii::app()->user->usertype == 1){ ?>		
+		<?php echo CHtml::button('Cancel', array('class'=>'btn btn-default','aria-label'=>"Close", 'data-dismiss'=>"modal")); ?>
+		<?php } ?>
+	</div>
+
+<?php $this->endWidget(); ?>
+
+</div><!-- form -->
+
+<script>
+$(document).ready(function(){
+var id = <?php echo (isset($_GET['id']))?$_GET['id']:'0'; ?>;
+var input = $("<input>")
+			   .attr("type", "hidden")
+			   .attr("name", "location").val(id);
+$('#location-product-form').append($(input));
+});
+
+function my_custom_validation(){
+					
+	if ($('#availabilityTab .errorMessage').css('display') == 'block' ) {
+		$('#ui-id-1').trigger('click');
+	}else if ($('#salesTab .errorMessage').css('display') == 'block' ) {
+		$('#ui-id-2').trigger('click');
+	}else if ($('#salesTab .errorMessage').css('display') == 'block' ) {
+		$('#ui-id-3').trigger('click');
+	}
+}
+</script>

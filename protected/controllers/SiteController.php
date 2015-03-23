@@ -132,4 +132,11 @@ class SiteController extends Controller
 		Yii::app()->session['environment_cond'] = "true";
         }
     }
+	
+	/**
+	 * Displays the message on page
+	 */
+	public function actionMessage(){
+		$this->render('message');
+	}
 }

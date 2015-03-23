@@ -47,18 +47,18 @@
 		<?php echo $form->labelEx($model,'addr_street'); ?>
 		<?php echo $form->textField($model,'addr_street',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'addr_street',array(),false); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'addr_street_2'); ?>
-		<?php echo $form->textField($model,'addr_street_2',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'addr_street_2',array(),false); ?>
-	</div>
+	</div>	
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'addr_street_no'); ?>
 		<?php echo $form->textField($model,'addr_street_no',array('size'=>50,'maxlength'=>50)); ?>
 		<?php echo $form->error($model,'addr_street_no',array(),false); ?>
+	</div>
+	
+	<div class="row">
+		<?php echo $form->labelEx($model,'addr_street_2'); ?>
+		<?php echo $form->textField($model,'addr_street_2',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->error($model,'addr_street_2',array(),false); ?>
 	</div>
 
 	<div class="row">
@@ -72,24 +72,55 @@
 		<?php echo $form->textField($model,'addr_postal_code',array('size'=>50,'maxlength'=>50)); ?>
 		<?php echo $form->error($model,'addr_postal_code',array(),false); ?>
 	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'addr_city_id'); ?>
-		<?php echo $form->textField($model,'addr_city_id'); ?>
-		<?php echo $form->error($model,'addr_city_id',array(),false); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'addr_state_id'); ?>
-		<?php echo $form->textField($model,'addr_state_id'); ?>
-		<?php echo $form->error($model,'addr_state_id',array(),false); ?>
-	</div>
-
+	
+	
 	<div class="row">
 		<?php echo $form->labelEx($model,'addr_country_id'); ?>
-		<?php echo $form->textField($model,'addr_country_id'); ?>
+		<?php echo $form->dropDownList($model, 'addr_country_id', CHtml::listData( Country::model()->findAll(array('condition'=>"$environment_cond")), 'country_id', 'country_name'),
+                    array(
+                    'ajax' => array(
+                        'type'=>'POST',
+                        'url'=>CController::createUrl('/admin/Country/Dynamicsupplierregion'),
+                        'update'=>'#Supplier_addr_state_id', //selector to update
+                    ),
+                    'class'=>'span3', 'prompt' => 'Select Country')); ?>
 		<?php echo $form->error($model,'addr_country_id',array(),false); ?>
 	</div>
+	
+	<div class="row">
+		<?php echo $form->labelEx($model,'addr_state_id'); ?>
+		<?php
+			if($model->addr_country_id != ''){
+			    $country = " country_id = '".$model->addr_country_id."' and ";
+			}else{	    
+			    $country = "false and ";
+			}
+		?>
+		<?php echo $form->dropDownList($model, 'addr_state_id', CHtml::listData( Province::model()->findAll(array('condition'=>"$country $environment_cond")), 'province_id', 'province_name'),
+				array(
+				'ajax' => array(
+					'type'=>'POST',
+					'url'=>CController::createUrl('/admin/Province/Dynamicsuppliercity'),
+					'update'=>'#Supplier_addr_city_id', //selector to update
+				),
+				'class'=>'span3', 'prompt' => 'Select Province')); ?>		
+		<?php echo $form->error($model,'addr_state_id',array(),false); ?>
+	</div>
+	
+	<div class="row">
+		<?php echo $form->labelEx($model,'addr_city_id'); ?>
+		<?php
+			if($model->addr_state_id != ''){
+			    $state = " state_id = '".$model->addr_state_id."' and ";
+			}else{	    
+			    $state = "false and ";
+			}			
+		?>
+		<?php echo $form->dropDownList($model, 'addr_city_id', CHtml::listData( City::model()->findAll(array('condition'=>"$state $environment_cond")), 'city_id', 'city_name'),array('class'=>'span3', 'prompt' => 'Select City')); ?>		
+		<?php echo $form->error($model,'addr_city_id',array(),false); ?>
+	</div>
+	
+
         <div class="row">
             <?php echo CHtml::label('Invoice Address','flase'); ?>
             <span>
@@ -106,18 +137,18 @@
 		<?php echo $form->labelEx($model,'inv_street'); ?>
 		<?php echo $form->textField($model,'inv_street',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'inv_street',array(),false); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'inv_street_2'); ?>
-		<?php echo $form->textField($model,'inv_street_2',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'inv_street_2',array(),false); ?>
-	</div>
+	</div>	
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'inv_street_no'); ?>
 		<?php echo $form->textField($model,'inv_street_no',array('size'=>50,'maxlength'=>50)); ?>
 		<?php echo $form->error($model,'inv_street_no',array(),false); ?>
+	</div>
+	
+	<div class="row">
+		<?php echo $form->labelEx($model,'inv_street_2'); ?>
+		<?php echo $form->textField($model,'inv_street_2',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->error($model,'inv_street_2',array(),false); ?>
 	</div>
 
 	<div class="row">
@@ -133,22 +164,52 @@
 	</div>
 
 	<div class="row">
+		<?php echo $form->labelEx($model,'inv_country_id'); ?>
+		<?php echo $form->dropDownList($model, 'inv_country_id', CHtml::listData( Country::model()->findAll(array('condition'=>"$environment_cond")), 'country_id', 'country_name'),
+                    array(
+                    'ajax' => array(
+                        'type'=>'POST',
+                        'url'=>CController::createUrl('/admin/Country/Dynamicsupplierregion'),
+                        'update'=>'#Supplier_inv_state_id', //selector to update
+                    ),
+                    'class'=>'span3', 'prompt' => 'Select Country')); ?>
+		<?php echo $form->error($model,'inv_country_id',array(),false); ?>
+	</div>
+	
+	<div class="row">
+		<?php echo $form->labelEx($model,'inv_state_id'); ?>
+		<?php
+			if($model->inv_country_id != ''){
+			    $country = " country_id = '".$model->inv_country_id."' and ";
+			}else{	    
+			    $country = "false and ";
+			}
+		?>
+		<?php echo $form->dropDownList($model, 'inv_state_id', CHtml::listData( Province::model()->findAll(array('condition'=>"$country $environment_cond")), 'province_id', 'province_name'),
+				array(
+				'ajax' => array(
+					'type'=>'POST',
+					'url'=>CController::createUrl('/admin/Province/Dynamicsuppliercity'),
+					'update'=>'#Supplier_inv_city_id', //selector to update
+				),
+				'class'=>'span3', 'prompt' => 'Select Province')); ?>		
+		<?php echo $form->error($model,'inv_state_id',array(),false); ?>
+	</div>
+	
+	<div class="row">
 		<?php echo $form->labelEx($model,'inv_city_id'); ?>
-		<?php echo $form->textField($model,'inv_city_id'); ?>
+		<?php
+			if($model->inv_state_id != ''){
+			    $state = " state_id = '".$model->inv_state_id."' and ";
+			}else{	    
+			    $state = "false and ";
+			}
+		?>
+		<?php echo $form->dropDownList($model, 'inv_city_id', CHtml::listData( City::model()->findAll(array('condition'=>"$state $environment_cond")), 'city_id', 'city_name'),array('class'=>'span3', 'prompt' => 'Select City')); ?>		
 		<?php echo $form->error($model,'inv_city_id',array(),false); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'inv_state_id'); ?>
-		<?php echo $form->textField($model,'inv_state_id'); ?>
-		<?php echo $form->error($model,'inv_state_id',array(),false); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'inv_country_id'); ?>
-		<?php echo $form->textField($model,'inv_country_id'); ?>
-		<?php echo $form->error($model,'inv_country_id',array(),false); ?>
-	</div>
+	
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'bsn'); ?>

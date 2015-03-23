@@ -1,5 +1,5 @@
 $(function($) {
-    // It for to assign edit link ID
+    // It is for to assign edit link ID
 	$('.fa-pencil-square-o').parent().attr('id','editlink');
 	$('#editlink').attr('href','Javascript:void(0);');
 	
@@ -16,7 +16,7 @@ $(function($) {
 		}
 	})
     
-    // It for to assign delete link ID
+    // It is for to assign delete link ID
 	$('.fa-trash').parent().attr('id','deletelink');
 	$('#deletelink').attr('href','Javascript:void(0);');
 	
@@ -42,6 +42,31 @@ $(function($) {
 		}
 	})
     
+    // It is for to assign reset password link
+    $('.fa-key').parent().attr('id','resetpwdlink');
+	$('#resetpwdlink').attr('href','Javascript:void(0);');
+	
+	$(document).on('click', '#resetpwdlink', function(){
+		var chk_length = $('#myCGridView [name="cgridview-check-boxes[]"]:checked').length;
+		if(chk_length == 0){
+			alert('Please select at least single record to reset password.');
+			return false;
+		}else{
+            var r = confirm("Are you sure to reset password?");
+            if (r == true) {
+                var ids = '';
+                $('#myCGridView [name="cgridview-check-boxes[]"]:checked').each(function() {
+                    ids += this.value+'-';
+                    
+                });
+                
+                var record_id	= $('#myCGridView [name="cgridview-check-boxes[]"]:checked').val();
+                var url = uniqueURL+'/resetpwd/id/'+ids;
+                $.blockUI();
+                window.location.href	= url;
+            }
+		}
+	})
     
 });
 

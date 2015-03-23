@@ -11,6 +11,7 @@ $this->menu=array(
 	array('label'=>'<i class="fa fa-plus-circle"></i> Add Supplier', 'url'=>array('create')),
 	array('label'=>'<i class="fa fa-pencil-square-o"></i> Edit Supplier', 'url'=>array('#')),
 	array('label'=>'<i class="fa fa-trash"></i> Delete Supplier', 'url'=>array('#')),
+	array('label'=>'<i class="fa fa-key"></i> Reset Password', 'url'=>array('#')),
 );
 
 Yii::app()->clientScript->registerScript('search', "

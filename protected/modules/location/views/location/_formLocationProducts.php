@@ -1,16 +1,18 @@
 <div id="locationProducts" class="tab-pane" role="tabpanel">
+                <?php
+                    foreach(Yii::app()->user->getFlashes() as $key => $message) {
+                        echo '<div class="alert alert-link alert-' . $key . '">' . $message . "</div>\n";
+                    }
+                ?>
                 <ul class="list-inline">
                     <li>
-                        <a data-toggle="modal" data-target="#myModal" href="javascript:void(0)"><i class="fa fa-plus"></i> Add</a>
+                        <a id="add-location" data-toggle="modal" data-target="#myModal" href="javascript:void(0)"><i class="fa fa-plus"></i> Add</a>
                     </li>
                     <li>
-                        <a href="javascript:void(0)"><i class="fa fa-pencil"></i> Edit</a>
+                        <a id="edit-location" href="javascript:void(0)"><i class="fa fa-pencil"></i> Edit</a>
                     </li>
                     <li>
-                        <a href="javascript:void(0)"><i class="fa fa-trash"></i> Delete</a>
-                    </li>
-                    <li>
-                        <a data-toggle="modal" data-target="#purchasePrice" href="javascript:void(0)"><i class="fa fa-pencil-square-o"></i> Set purchase price</a>
+                        <a id="delete-location" href="javascript:void(0)"><i class="fa fa-minus-square"></i> Delete</a>
                     </li>
                     <li>
                         Season
@@ -23,78 +25,35 @@
                         </select>
                     </li>
                     <li>
-                        <a href="javascript:void(0)"><i class="fa fa-file"></i> Copy season</a>
+                        <a id="export-location" href="javascript:void(0)"><i class="fa fa-file"></i> Export products</a>
                     </li>
                     <li>
-                        <a href="javascript:void(0)"><i class="fa fa-file"></i> Copy season from location</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)"><i class="fa fa-file"></i> Export products</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)"><i class="fa fa-file"></i> Import products</a>
+                        <a id="import-location" href="javascript:void(0)"><i class="fa fa-file"></i> Import products</a>
                     </li>
                 </ul>
                 <!--modal start here--> 
                 <!-- Modal for add product-->
                 <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
-                  <?php $this->renderPartial('_formProduct', array()); ?>
-                </div>
-                
-                <!-- Modal for set Purchase price -->
-                <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="purchasePrice" class="modal fade">
                   <div class="modal-dialog">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <button aria-label="Close" data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span></button>
-                        <h4 id="myModalLabel" class="modal-title">Set purchase price of selected products</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">X</span></button>
+                          <h4 class="modal-title" id="myModalLabel">Add products</h4>
                       </div>
-                          <div class="modal-body">
-                            <form class="form-horizontal">
-                                      <div class="form-group">
-                                        <label class="col-sm-4 control-label">Purchase price</label>
-                                        <div class="col-sm-7">
-                                          <input type="text" class="form-control" placeholder="0">
-                                        </div>
-                                      </div>
-                                      <div class="form-group">
-                                        <label class="col-sm-4 control-label">Percentage of sale price</label>
-                                        <div class="col-sm-7">
-                                          <input type="text" class="form-control" placeholder="0">
-                                        </div>
-                                      </div>
-                                  <div class="form-group">
-                                    <label class="col-sm-4 control-label">Unit</label>
-                                    <div class="col-sm-7">
-                                      <select class="form-control">
-                                        <option>Purchase price unit</option>
-                                        <option>Per day</option>
-                                        <option>Per hour</option>
-                                      </select>
-                                    </div>
-                                  </div>
-                                  
-                                  <div class="form-group">
-                                    <label class="col-sm-4 control-label">Purchase percentage</label>
-                                    <div class="col-sm-7">
-                                      <input type="text" class="form-control" placeholder="0">
-                                    </div>
-                                  </div>
-                                  
-                                </form>
-                          </div>
-                      <div class="modal-footer">
-                        <button class="btn btn-success" type="button">Save</button>
-                        <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
+                      <div class="modal-body">
+                        <?php $this->renderPartial('_formProduct', array('model_lp'=>$model_lp,'model_ls'=>$model_ls)); ?>
                       </div>
                     </div>
                   </div>
                 </div>
-                <!--modal end here-->
+                
                 <div class="table-responsive">
                 <table id="location-product" class="table table-striped table-bordered">
                   <thead>
                     <tr>
+                      <th id="check-boxes" width="15">
+                        <input type="checkbox" id="check-boxes_all" name="check-boxes_all">
+                      </th>
                       <th width="100"> Sale Type </th>
                       <th width="100"> From </th>
                       <th width="100"> Until </th>
@@ -103,7 +62,6 @@
                       <th width="100"> Nights </th>
                       <th width="100"> Stay type</th>
                       <th width="150"> Special stay type </th>
-                      <th width="100"> Price </th>
                       <th width="100"> Price unit </th>
                       <th width="100"> Max quantity </th>
                       <th width="100"> Max quantity unit </th>
@@ -118,83 +76,68 @@
                   </thead>
                 </table>
                 <div class="panel-group">
-                	<div id="id1" class="panel">
-                		<div class="panel-heading"><i class="fa fa-plus-square"></i> <i class="fa fa-minus-square"></i> Heading</div>
+                	<?php
+                  if(count($data) > 0) {
+                    
+                    $location_sale_type = CHtml::listData(LocationSaleType::model()->findAll(),'location_sale_type_id','location_sale_type');
+                    $location_stay_type = CHtml::listData(LocationStayType::model()->findAll(),'location_stay_type_id','location_stay_type');
+                    $location_special_type = CHtml::listData(LocationSpecialType::model()->findAll(),'location_special_type_id','location_special_type');
+                    $location_unit = CHtml::listData(LocationUnit::model()->findAll(),'location_unit_id','location_unit');
+                    
+                    foreach($data as $key => $val) {
+                      $id = $val->product_id;
+                      $name = Product::model()->findall(array('condition'=>"product_id = $id",'select'=>'title'));
+                      $name = $name[0]->title;
+                      $l_id = $_GET['id'];
+                      $product_location = LocationProduct::model()->findAll(array('condition'=>"location_id = $l_id and product_id = $id",));
+                      
+                      
+                    ?>
+                    <div id="id<?php echo $id; ?>" class="panel">
+                		<div class="panel-heading" data="<?php echo $id; ?>"><i class="fa fa-plus-square"></i> <i class="fa fa-minus-square"></i> <?php echo $name;?></div>
                         <div class="panel-body">
                         	<table id="location-product" class="table table-striped table-bordered table-hover">
-                                <tbody><tr>
-                                  <td width="100"> Office, Website </td>
-                                  <td width="100"> 3-04-15 </td>
-                                  <td width="100"> 2-11-15 </td>
-                                  <td width="100"> 0 </td>
-                                  <td width="100"> zmdwdvz </td>
-                                  <td width="100"> 0 </td>
-                                  <td width="100"> N/A</td>
-                                  <td width="150"> Special stay type </td>
-                                  <td width="100"> 7.50 </td>
-                                  <td width="100"> Each </td>
-                                  <td width="100"> 0 </td>
-                                  <td width="100"> Max quantity unit </td>
-                                  <td width="100"> 0.00 </td>
-                                  <td width="100"> 7.50</td>
-                                  <td width="100"> Each </td>
-                                  <td width="110"> 0.00 </td>
-                                  <td width="100"> 0 </td>
-                                  <td width="100"> 1 </td>
-                                  <td width="100"> 1 </td>
-                                </tr>
+                            <tbody>
+                            <?php foreach($product_location as $p_l) {
+                              $sale_type = explode(',',$p_l->sale_type_id);
+                              $types = array();
+                              foreach($sale_type as $s_t){
+                                $types[] = $location_sale_type[$s_t];
+                              }
+                              $types = implode(',',$types);
+                              ?>
                                 <tr>
-                                  <td width="100"> Office, Website </td>
-                                  <td width="100"> 3-04-15 </td>
-                                  <td width="100"> 2-11-15 </td>
-                                  <td width="100"> 0 </td>
-                                  <td width="100"> zmdwdvz </td>
-                                  <td width="100"> 0 </td>
-                                  <td width="100"> N/A</td>
-                                  <td width="150"> Special stay type </td>
-                                  <td width="100"> 7.50 </td>
-                                  <td width="100"> Each </td>
-                                  <td width="100"> 0 </td>
-                                  <td width="100"> Max quantity unit </td>
-                                  <td width="100"> 0.00 </td>
-                                  <td width="100"> 7.50</td>
-                                  <td width="100"> Each </td>
-                                  <td width="110"> 0.00 </td>
-                                  <td width="100"> 0 </td>
-                                  <td width="100"> 1 </td>
-                                  <td width="100"> 1 </td>
+                                  <td class="checkbox-column" style="width: 20px">
+                                    <input type="checkbox" class="check-boxes" name="check-boxes[]" id="check-boxes_<?php echo $p_l->location_product_id; ?>" value="<?php echo $p_l->location_product_id; ?>">
+                                  </td>
+                                  <td width="100"><?php echo $types; ?> </td>
+                                  <td width="100"> <?php echo customDateFormat('Y-m-d','m-d-Y',($p_l->stock_from != '0000-00-00')?$p_l->stock_from:''); ?> </td>
+                                  <td width="100"> <?php echo customDateFormat('Y-m-d','m-d-Y',($p_l->stock_till != '0000-00-00')?$p_l->stock_till:''); ?> </td>
+                                  <td width="100"> <?php echo $p_l->total_qty; ?> </td>
+                                  <td width="100"> <?php echo $p_l->available_days; ?> </td>
+                                  <td width="100"> <?php echo $p_l->available_nights; ?> </td>
+                                  <td width="100"> <?php echo $location_stay_type[$p_l->available_type]; ?></td>
+                                  <td width="150"> <?php echo $location_special_type[$p_l->available_special_type_id]; ?> </td>
+                                  <td width="100"> <?php echo $location_unit[$p_l->sale_price_unit_id]; ?> </td>
+                                  <td width="100"> <?php echo $p_l->sale_max_qty; ?> </td>
+                                  <td width="100"> <?php echo $location_unit[$p_l->sale_max_unit_id]; ?> </td>
+                                  <td width="100"> <?php echo $p_l->sale_percentage; ?> </td>
+                                  <td width="100"> <?php echo $p_l->purchase_price; ?> </td>
+                                  <td width="100"> <?php echo $location_unit[$p_l->purchase_price_unit_id]; ?></td>
+                                  <td width="100"> <?php echo $p_l->purchase_percentage; ?> </td>
+                                  <td width="110"> <?php echo ($p_l->is_manadatory == 1) ? "Yes" : "No"; ?> </td>
+                                  <td width="100"> <?php echo ($p_l->primary_status == 1) ? "Yes" : "No"; ?> </td>
+                                  <td width="100"> <?php echo ($p_l->secondary_status == 1) ? "Yes" : "No"; ?> </td>
                                 </tr>
+                            <?php } ?>
                             </tbody></table>
                         </div>
                 	</div>
-                    <div id="id2" class="panel">
-                		<div class="panel-heading"><i class="fa fa-plus-square"></i> <i class="fa fa-minus-square"></i> Heading</div>
-                        <div class="panel-body">
-                        	<table id="location-product" class="table table-striped table-bordered table-hover">
-                                <tbody><tr>
-                                  <td width="100"> Office, Website </td>
-                                  <td width="100"> 3-04-15 </td>
-                                  <td width="100"> 2-11-15 </td>
-                                  <td width="100"> 0 </td>
-                                  <td width="100"> zmdwdvz </td>
-                                  <td width="100"> 0 </td>
-                                  <td width="100"> N/A</td>
-                                  <td width="150"> Special stay type </td>
-                                  <td width="100"> 7.50 </td>
-                                  <td width="100"> Each </td>
-                                  <td width="100"> 0 </td>
-                                  <td width="100"> Max quantity unit </td>
-                                  <td width="100"> 0.00 </td>
-                                  <td width="100"> 7.50</td>
-                                  <td width="100"> Each </td>
-                                  <td width="110"> 0.00 </td>
-                                  <td width="100"> 0 </td>
-                                  <td width="100"> 1 </td>
-                                  <td width="100"> 1 </td>
-                                </tr>
-                            </tbody></table>
-                        </div>
-                	</div>
+                    <?php }
+                    } else { ?>
+                    
+                    
+                    <?php } ?>
                 </div>
                 </div>
               </div>

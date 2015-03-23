@@ -52,7 +52,7 @@
 	<div class="row">
 		<?php echo $form->labelEx($model,'locale'); ?>
 		<?php echo $form->textField($model,'locale',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'locale',array(),false); ?>
+		<?php echo $form->error($model,'locale'); ?>
 	</div>
 
 	<div class="row">

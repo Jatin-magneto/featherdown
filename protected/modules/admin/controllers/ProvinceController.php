@@ -35,6 +35,10 @@ class ProvinceController extends Controller
 				'actions'=>array('admin','delete','deleterec'),
 				'users'=>array('admin'),
 			),
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('dynamicsuppliercity'),
+				'users'=>array('*'),
+			),
 			array('deny',  // deny all users
                 'actions'=>array('index','view'),
 				'users'=>array('*'),
@@ -214,4 +218,17 @@ class ProvinceController extends Controller
 			Yii::app()->end();
 		}
 	}
+	
+	public function actionDynamicsuppliercity()
+    {   
+        $state_id = $_POST['Supplier']['addr_state_id'];
+        $environment_cond = Yii::app()->session['environment_cond'];
+        $data=City::model()->findAll(array("condition" => "state_id = $state_id and $environment_cond"));
+     
+        $data=CHtml::listData($data,'city_id','city_name');
+        echo CHtml::tag('option',array('value'=>''),CHtml::encode('Select City'),true);
+        foreach($data as $value=>$name) {
+            echo CHtml::tag('option',array('value'=>$value),CHtml::encode($name),true);
+        }
+    }
 }

@@ -127,10 +127,12 @@ $(document).ready(function(){
             $('#Supplier_inv_street_2').val($('#Supplier_addr_street_2').val());
 	    $('#Supplier_inv_street_no').val($('#Supplier_addr_street_no').val());
             $('#Supplier_inv_street_no_sufx').val($('#Supplier_addr_street_no_sufx').val());
-            $('#Supplier_inv_postal_code').val($('#Supplier_addr_postal_code').val());
-	    $('#Supplier_inv_city_id').val($('#Supplier_addr_city_id').val());
-            $('#Supplier_inv_state_id').val($('#Supplier_addr_state_id').val());
-            $('#Supplier_inv_country_id').val($('#Supplier_addr_country_id').val());
+            $('#Supplier_inv_postal_code').val($('#Supplier_addr_postal_code').val());	    
+            $('#Supplier_inv_country_id').val($('#Supplier_addr_country_id').val());			
+			$('#Supplier_inv_country_id').trigger('change');			
+			window.setTimeout(function(){$('#Supplier_inv_state_id option[value='+$('#Supplier_addr_state_id').val()+']').attr('selected','selected')}, 2000);
+			$('#Supplier_inv_state_id').trigger('change');
+			window.setTimeout(function(){$('#Supplier_inv_city_id option[value='+$('#Supplier_addr_city_id').val()+']').attr('selected','selected')}, 2000);			
         } else {
             //Clear on uncheck
             $('#Supplier_inv_title').val("");

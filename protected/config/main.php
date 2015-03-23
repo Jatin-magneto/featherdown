@@ -18,16 +18,17 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
-                'application.modules.admin.models.*',
-                'application.modules.admin.components.*',
-                'application.modules.product.models.*',
-                'application.modules.product.components.*',
-                'application.modules.account.models.*',
-                'application.modules.account.components.*',
-                'application.modules.location.models.*',
-                'application.modules.location.components.*',
-                'application.modules.supplier.models.*',
-                'application.modules.supplier.components.*',
+        'application.modules.admin.models.*',
+        'application.modules.admin.components.*',
+        'application.modules.product.models.*',
+        'application.modules.product.components.*',
+        'application.modules.account.models.*',
+        'application.modules.account.components.*',
+        'application.modules.location.models.*',
+        'application.modules.location.components.*',
+        'application.modules.supplier.models.*',
+        'application.modules.supplier.components.*',
+        'application.extensions.smtpmail.PHPMailer',
 	),
 
 	'modules'=>array(
@@ -70,10 +71,10 @@ return array(
 		// database settings are configured in database.php
 		//'db'=>require(dirname(__FILE__).'/database.php'),
 		 'db'=>array(
-                    'connectionString' => 'mysql:host=192.168.2.13;dbname=featherdown_v1',
+                    'connectionString' => 'mysql:host=192.168.2.19;dbname=featherdown_v1',
                     'emulatePrepare' => true,
                     'username' => 'root',
-                    'password' => '',
+                    'password' => 'Google',
                     'charset' => 'utf8',
                    ), 
                    /*
@@ -107,6 +108,17 @@ return array(
 				*/
 			),
 		),
+        
+        'Smtpmail'=>array(
+            'class'         => 'application.extensions.smtpmail.PHPMailer',
+            'Host'          => "smtp.gmail.com",
+            'Username'      => 'featherdown.magneto@gmail.com',
+            'Password'      => 'magneto123',
+            'Mailer'        => 'smtp',
+            'Port'          => 587,
+            'SMTPSecure'    => 'tls',
+            'SMTPAuth'      => true, 
+        ),
 
 	),
 

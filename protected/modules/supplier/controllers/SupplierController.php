@@ -32,7 +32,7 @@ class SupplierController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','deleterec'),
+				'actions'=>array('admin','delete','deleterec','resetpwd'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -169,12 +169,56 @@ class SupplierController extends Controller
 	{
 		try{
 			$id = str_replace('-',',',rtrim($_GET['id'],'-'));
-			Product::model()->deleteAll("supplier_id IN ($id)");
+			Supplier::model()->deleteAll("supplier_id IN ($id)");
 			Yii::app()->user->setFlash('info', "Record has been deleted successfully.");
 			$this->redirect(array('admin'));
 		}catch(CDbException $e){
 			//You can have nother error handling
 			Yii::app()->user->setFlash('error', "Can not delete this record(s). Foreign constraint violation.");
+			$this->redirect(array('admin'));
+		}
+	}
+	
+	public function actionResetpwd(){
+		try{
+			$id 					= str_replace('-',',',rtrim($_GET['id'],'-'));
+			$ids					= explode(',',$id);			
+			$criteria 				= new CDbCriteria;
+			$criteria->select		= "email";
+			$criteria->condition	= " supplier_id IN ($id) ";
+			$active_emails 			= Supplier::model()->findAll($criteria);
+			
+			//$active_emails = array();
+			//$active_emails[0]['email'] = 'hiren.magneto@gmail.com';			
+			
+			$from 		= "FeatherDown";
+			$subject	= "Supplier: Reset Password";
+			
+			
+			for($i=0;$i<count($active_emails);$i++){
+				
+				$email		= $active_emails[$i]['email'];
+				$random		= randomString(6);
+				$url		= Yii::app()->getBaseUrl(true);
+				$url		.= '/supplier/user/forgotpwd/rnd/'.$random;			
+				
+				$message	= "<p>Hello, \n </p>";
+				$message	.= "<p>Greetings For the day! \n </p>";
+				$message	.= "<p><a href='$url'>Click here</a> to reset your password. \n </p>";
+				$message	.= "<p>Thanks, \n </p>";
+			
+				$sql = "UPDATE tbl_supplier SET random_str = '$random' WHERE email = '$email'";
+				Common::model()->executeQuery($sql);
+				
+				//sendEmail($to, $cc = '', $bcc = '', $from, $subject, $message, $attachment = array(), $formname = '')				
+				sendEmail($email,'','', $from, $subject, $message,array(), 'Supplier');
+			}
+			
+			Yii::app()->user->setFlash('info', "Email has been sent successfully to registered email address.");
+			$this->redirect(array('admin'));
+		}catch(CDbException $e){
+			//You can have nother error handling
+			Yii::app()->user->setFlash('error', "Can not sent emails to reset password.");
 			$this->redirect(array('admin'));
 		}
 	}

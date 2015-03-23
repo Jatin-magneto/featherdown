@@ -42,6 +42,7 @@ class Locale extends CActiveRecord
 		return array(
 			array('country_id,isactive, currency_id, language_id, locale, locale_slug, date_short, date_long, environments, locale_pricing', 'required'),
 			array('locale_slug', 'unique', 'className' => 'Locale', 'attributeName' => 'locale_slug', 'message'=>'This slug is already in use'),
+			array('locale', 'unique', 'className' => 'Locale', 'attributeName' => 'locale', 'message'=>'This locale is already in use'),
 			array('country_id, currency_id, language_id', 'numerical', 'integerOnly'=>true),
 			array('locale, locale_slug, created_by, updated_by', 'length', 'max'=>255),
 			array('date_short, date_long', 'length', 'max'=>15),

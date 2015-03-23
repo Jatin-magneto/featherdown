@@ -11,6 +11,7 @@
  * @property string $location_address
  * @property string $zip_code
  * @property integer $city_id
+ * @property integer $region_id
  * @property integer $supplier_id
  * @property string $image
  * @property string $url
@@ -52,7 +53,7 @@ class Location extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('location_type_id,title,location_address,zip_code,tax_included,latitute,longitude,isactive,environments, city_id, supplier_id, sort_order', 'required'),
+			array('location_type_id,title,location_address,zip_code,region_id,tax_included,latitute,longitude,isactive,environments, supplier_id, sort_order', 'required'),
 			array('location_type_id, city_id, supplier_id, sort_order', 'numerical', 'integerOnly'=>true),
 			array('title, created_by, updated_by', 'length', 'max'=>255),
 			array('image', 'file', 'types'=>'jpg, png','allowEmpty' => true,'on'=>'insert'),
@@ -60,10 +61,10 @@ class Location extends CActiveRecord
 			array('url, supplier_form_url', 'length', 'max'=>50),
 			array('tax_included, isactive', 'length', 'max'=>1),
 			array('latitute, longitude', 'length', 'max'=>25),
-			array('location_desc', 'safe'),
+			array('location_desc, city_id', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('created,updated,location_id, location_type_id, title, location_desc, location_address, zip_code, city_id, supplier_id, image, url, supplier_form_url, sort_order, tax_included, latitute, longitude, isactive, environments, created_on, created_by, updated_on, updated_by', 'safe', 'on'=>'search'),
+			array('created,updated,location_id, region_id, location_type_id, title, location_desc, location_address, zip_code, city_id, supplier_id, image, url, supplier_form_url, sort_order, tax_included, latitute, longitude, isactive, environments, created_on, created_by, updated_on, updated_by', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -95,6 +96,7 @@ class Location extends CActiveRecord
 			'location_desc' => 'Location Desc',
 			'location_address' => 'Location Address',
 			'zip_code' => 'Zip Code',
+			'region_id' => 'Region',
 			'city_id' => 'City',
 			'supplier_id' => 'Supplier',
 			'image' => 'Image',
@@ -138,6 +140,7 @@ class Location extends CActiveRecord
 		$criteria->compare('location_address',$this->location_address,true);
 		$criteria->compare('zip_code',$this->zip_code,true);
 		$criteria->compare('city_id',$this->city_id);
+		$criteria->compare('region_id',$this->region_id);
 		$criteria->compare('supplier_id',$this->supplier_id);
 		$criteria->compare('image',$this->image,true);
 		$criteria->compare('url',$this->url,true);

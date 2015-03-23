@@ -7,6 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
+<link rel="shortcut icon" type="image/x-icon" href="<?php echo Yii::app()->baseUrl; ?>/favicon.ico">
+
 <title>Feather Down Farm Days</title>
 
 <!-- Bootstrap Core CSS -->
@@ -145,12 +147,12 @@ Yii::app()->clientScript->registerScript(
                   <a href="javascript:void(0)" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown">Global <b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li><a href="<?php echo $this->createUrl('/admin/region/admin') ?>">Region</a></li>
-		    <li><a href="<?php echo $this->createUrl('/admin/country/admin') ?>">Country</a></li>
-                    <li><a href="<?php echo $this->createUrl('/admin/city/admin') ?>">City</a></li>
+				    <li><a href="<?php echo $this->createUrl('/admin/country/admin') ?>">Country</a></li>
                     <li><a href="<?php echo $this->createUrl('/admin/province/admin') ?>">Province</a></li>
-		    <li><a href="<?php echo $this->createUrl('/admin/saleType/admin') ?>">Sale Type</a></li>
+					<li><a href="<?php echo $this->createUrl('/admin/city/admin') ?>">City</a></li>
+				    <li><a href="<?php echo $this->createUrl('/admin/saleType/admin') ?>">Sale Type</a></li>
                     <li><a href="<?php echo $this->createUrl('/admin/saleChannelType/admin') ?>">Sale Channel</a></li>
-		    <li><a href="<?php echo $this->createUrl('/admin/emailSettings/admin') ?>">Email Settings</a></li>
+				    <li><a href="<?php echo $this->createUrl('/admin/emailSettings/admin') ?>">Email Settings</a></li>
                   </ul>
                 </li>
                 <li class="dropdown">
@@ -159,14 +161,14 @@ Yii::app()->clientScript->registerScript(
                     <li><a href="<?php echo $this->createUrl('/product/productCategory/admin') ?>">Product Category</a></li>
                     <li><a href="<?php echo $this->createUrl('/product/product/admin') ?>">Product</a></li>
                     <li><a href="<?php echo $this->createUrl('/location/locationType/admin') ?>">Location Type</a></li>
-		    <li><a href="<?php echo $this->createUrl('/location/location/admin') ?>">Location</a></li>
+				    <li><a href="<?php echo $this->createUrl('/location/location/admin') ?>">Location</a></li>
                 </ul>
                 </li>
                 <li class="dropdown">
                   <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">User <b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li><a href="<?php echo $this->createUrl('/supplier/supplier/admin') ?>">Supplier</a></li>
-		    <li><a href="<?php echo $this->createUrl('/location/owner/admin') ?>">Location Owner</a></li>
+					<!--<li><a href="<?php echo $this->createUrl('/location/owner/admin') ?>">Location Owner</a></li>-->
                     <li><a href="javascript:void(0)">User Permission</a></li>
                   </ul>
                 </li>
@@ -175,8 +177,8 @@ Yii::app()->clientScript->registerScript(
                   <ul class="dropdown-menu">
                     <li><a href="<?php echo $this->createUrl('/admin/environment/admin') ?>">Environments</a></li>
                     <li><a href="<?php echo $this->createUrl('/admin/language/admin') ?>">Language</a></li>
-		    <li><a href="<?php echo $this->createUrl('/admin/currency/admin') ?>">Currency</a></li>
-		    <li><a href="<?php echo $this->createUrl('/admin/locale/admin') ?>">Locale</a></li>
+				    <li><a href="<?php echo $this->createUrl('/admin/currency/admin') ?>">Currency</a></li>
+		            <li><a href="<?php echo $this->createUrl('/admin/locale/admin') ?>">Locale</a></li>
                   </ul>
                 </li>
                 
@@ -185,9 +187,9 @@ Yii::app()->clientScript->registerScript(
                   <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">Accounting <b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li><a href="<?php echo $this->createUrl('/account/ledger/admin') ?>">Ledger</a></li>
-		    <li><a href="<?php echo $this->createUrl('/account/ledgerCategory/admin') ?>">Ledger Category</a></li>
-		    <li><a href="<?php echo $this->createUrl('/admin/tax/admin') ?>">Tax</a></li>
-		    <li><a href="<?php echo $this->createUrl('/admin/taxGroup/admin') ?>">Tax Group</a></li>
+			        <li><a href="<?php echo $this->createUrl('/account/ledgerCategory/admin') ?>">Ledger Category</a></li>
+				    <li><a href="<?php echo $this->createUrl('/admin/tax/admin') ?>">Tax</a></li>
+				    <li><a href="<?php echo $this->createUrl('/admin/taxGroup/admin') ?>">Tax Group</a></li>
                     <li><a href="<?php echo $this->createUrl('/admin/paymentType/admin') ?>">Payment Type</a></li>
                     <li><a href="<?php echo $this->createUrl('/admin/bookingPaymentRules/admin') ?>">Payment Rules</a></li>
                   </ul>
@@ -210,7 +212,7 @@ Yii::app()->clientScript->registerScript(
 <!-- /#wrapper --> 
 <?php if(!Yii::app()->user->isGuest) { ?>
   <footer class="footer">
-      <p class="copyright"> 2015 &copy; featherdown.co.uk. All Copyrights Reserved. </p>
+      <p class="copyright"> <?php echo date('Y'); ?> &copy; featherdown.co.uk. All Copyrights Reserved. </p>
   </footer>
   
 

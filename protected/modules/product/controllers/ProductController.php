@@ -102,7 +102,6 @@ class ProductController extends Controller
 				Yii::app()->user->setFlash('info', "Record has been inserted successfully.");
 				$this->redirect(array('admin'));				
 			}
-			
 		}
 		
 		if(isset($model->environments)){

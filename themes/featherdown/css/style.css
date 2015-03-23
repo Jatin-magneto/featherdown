@@ -402,3 +402,25 @@ body { padding-top: 90px; }
 .alert-error hr { border-top-color: #e4b9c0 }
 .alert-error .alert-link { color: #843534 }
 /* END Flash message */
+
+/*-------11/3/2015------*/
+.modal-header .close span{ width:auto; line-height:25px;}
+.note{ text-align:right;}
+.modal-body .form input[type="text"], .modal-body .form input[type="file"], .modal-body .form input[type="password"], .modal-body .form input[type="email"], .modal-body .form input[type="url"], .modal-body .form select, .modal-body .form textarea{ width:280px;}
+.modal-body .form span {float: left; width: 280px;}
+.modal-body .form span label { margin-left: 10px; text-align: left; width: 105px;}
+.modal-body .form span.required{ width:auto; float:none;}
+
+.messageBox .content {width: 70%;}
+.messageBox .messages { min-height:150px; font-size:24px; text-align:center; margin-top:11%; color:#333;}
+.messageBox .form-actions{ padding:0 0 35px 20px !important; float:none !important;}
+
+.modal-body .form .errorMessage {
+    clear: both;
+    color: #f00;
+    line-height: normal;
+    margin-left: 220px;
+    text-indent: 10px;
+    top: -7px;
+    position: relative;
+}
